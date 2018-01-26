@@ -5,6 +5,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
 import config
+import os
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help = False)
 command_prefix="v!"
@@ -65,5 +66,5 @@ def findBobo(words):
 			return True
 	return False
 	
-client.run(config.token)
+client.run(os.environ('VadeBot_Token'))
 
