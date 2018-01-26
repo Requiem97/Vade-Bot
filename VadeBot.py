@@ -65,5 +65,5 @@ def findBobo(words):
 			return True
 	return False
 	
-client.run(os.environ('VadeBot_Token'))
+client.run(os.environ['VadeBot_Token'])
 
