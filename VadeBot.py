@@ -52,6 +52,29 @@ async def add(x, y):
 	except ValueError:
 		await client.say("That ain't a number ffs")
 
+@client.command()
+async def multiply(x, y):
+	try:
+		z = int(x)*int(y)
+		await client.say('{:d} * {:d} is {:d} \nQuick mafs'.format(int(x), int(y), int(z)))
+	except ValueError:
+		await client.say("That ain't a number ffs")
+
+@client.command()
+async def subtract(x, y):
+	try:
+		z = int(x)-int(y)
+		await client.say('{:d} - {:d} is {:d} \nQuick mafs'.format(int(x), int(y), int(z)))
+	except ValueError:
+		await client.say("That ain't a number ffs")
+		
+@client.command()
+async def divide(x, y):
+	try:
+		z = float(x)-float(y)
+		await client.say('{:0f} / {:0f} is {:0f} \nQuick mafs'.format(float(x), float(y), float(z)))
+	except ValueError:
+		await client.say("That ain't a number ffs")
 
 def boboTag(mess):
 	if mess=="BOBO MO":
