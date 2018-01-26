@@ -71,8 +71,8 @@ async def subtract(x, y):
 @client.command()
 async def divide(x, y):
 	try:
-		z = float(x)-float(y)
-		await client.say('{:0f} / {:0f} is {:0f} \nQuick mafs'.format(float(x), float(y), float(z)))
+		z = float(x)/float(y)
+		await client.say('{:0.1f} / {:0.1f} is {:0.1f} \nQuick mafs'.format(float(x), float(y), float(z)))
 	except ValueError:
 		await client.say("That ain't a number ffs")
 
