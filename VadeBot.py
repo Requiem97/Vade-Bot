@@ -75,6 +75,8 @@ async def divide(x, y):
 		await client.say('{:0.1f} / {:0.1f} is {:0.1f} \nQuick mafs'.format(float(x), float(y), float(z)))
 	except ValueError:
 		await client.say("That ain't a number ffs")
+	except ZeroDivisionError:
+		await client.say(BOBO MO <@{!s}> DI PWEDE YAN'.format(UserID))
 
 def boboTag(mess):
 	if mess=="BOBO MO":
