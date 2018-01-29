@@ -11,7 +11,10 @@ command_prefix="v!"
 messages=[]
 with open("curse.txt") as file:
 		messages = [line.strip() for line in file]
-picList=["Vade1.jpg","Vade2.jpg","megalul.png"]
+picList=[]
+for file in os.listdir("."):
+	if file.endswith(".png") or file.endswith(".jpg"):
+		picList.append(file)
 UserID="test"
 
 @client.event
