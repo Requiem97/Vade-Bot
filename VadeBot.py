@@ -8,14 +8,15 @@ import os
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help = False)
 command_prefix="v!"
-messages=["FUCK THIS SHIT", "TANGINA", "GAGO", "Fucking bullshit", "LUL", "Gab *always* takes precedence. __***Always***__",
-"XD", "POTA", "TF", "BOBO MO"]
+messages=[]
 picList=["Vade1.jpg","Vade2.jpg","megalul.png"]
 UserID="test"
 
 @client.event
 async def on_ready():
 	print('Logged in as '+client.user.name+' (ID:'+client.user.id+') | Connected to '+str(len(client.servers))+' servers | Connected to '+str(len(set(client.get_all_members())))+' users')
+	with open("curse.txt") as file:
+		messages = [line.strip() for line in file]
 	return await client.change_presence(game=discord.Game(name='SOME SHITTY GAME'))
 
 @client.event
@@ -28,7 +29,7 @@ async def on_message(message):
 		if random.randint(1,100) <= 3:
 			msg = random.choice(messages)
 			await client.send_message(message.channel, boboTag(msg))
-		elif findBobo(words) == True:
+		if findBobo(words) == True:
 			await client.send_message(message.channel, boboTag("BOBO MO"))
 
 @client.command()
