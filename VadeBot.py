@@ -10,12 +10,13 @@ client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help = False)
 command_prefix="v!"
 messages=[]
 with open("curse.txt") as file:
-		messages = [line.strip() for line in file]
+	messages = [line.strip() for line in file]
 picList=[]
 for file in os.listdir("."):
 	if file.endswith(".png") or file.endswith(".jpg"):
 		picList.append(file)
-UserID="test"
+UserID = ""
+channel = ""
 
 @client.event
 async def on_ready():
@@ -25,6 +26,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
 	global UserID
+	global channel
+	channel = message.channel
 	UserID = message.author.id
 	await client.process_commands(message)
 	words = message.content.lower().split()
@@ -32,8 +35,12 @@ async def on_message(message):
 		if random.randint(1,100) <= 3:
 			msg = random.choice(messages)
 			await client.send_message(message.channel, boboTag(msg))
-		if findBobo(words) == True:
+		elif findBobo(words) == True:
 			await client.send_message(message.channel, boboTag("BOBO MO"))
+
+@client.event
+async def on_command_error(self,error):
+	await client.send_message(channel, boboTag("BOBO MO BAWAL YAN"))
 
 @client.command()
 async def ping():
@@ -81,6 +88,16 @@ async def divide(x, y):
 		await client.say("That ain't a number ffs")
 	except ZeroDivisionError:
 		await client.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(UserID))
+
+@client.command()
+async def bros(user: discord.User = None):
+	try:
+		if user == None:
+			await client.say('Bros before hoes <@{!s}>'.format(user.id))
+		else:
+			await client.say('Bros before hoes')
+	except:
+		await client.say('Bros before hoes')
 
 def boboTag(mess):
 	if mess=="BOBO MO":
