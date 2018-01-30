@@ -92,7 +92,7 @@ async def divide(x, y):
 @client.command()
 async def bros(user: discord.User = None):
 	try:
-		if user == None:
+		if user:
 			await client.say('Bros before hoes <@{!s}>'.format(user.id))
 		else:
 			await client.say('Bros before hoes')
