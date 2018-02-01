@@ -14,6 +14,9 @@ picList = []
 for file in os.listdir( "." ):
     if file.endswith( ".png" ) or file.endswith( ".jpg" ):
         picList.append( file )
+ballReplies=[]
+with open( "8ballReplies.txt" ) as file:
+    ballReplies = [line.strip() for line in file]
 UserID = ""
 channel = ""
 
