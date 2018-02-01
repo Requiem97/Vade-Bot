@@ -35,16 +35,22 @@ async def on_message(message):
     await client.process_commands( message )
     words = message.content.lower().split()
     if UserID != client.user.id:
-        if random.randint( 1, 100 ) <= 3:
+        if message.content.startswith('v!8ball'):
+            if len(words) == 1:
+                await client.send_message( message.channel, "THAT AIN'T A FUCKING QUESTION FFS" )
+            else:
+                await client.send_message( message.channel, random.choice(ballReplies))
+        if findBobo( words ) == True:
+            await client.send_message( message.channel, boboTag( "BOBO MO" ) )
+        elif random.randint( 1, 100 ) <= 3:
             msg = random.choice( messages )
             await client.send_message( message.channel, boboTag( msg ) )
-        elif findBobo( words ) == True:
-            await client.send_message( message.channel, boboTag( "BOBO MO" ) )
+
 
 
 @client.event
 async def on_command_error(self, error):
-    await client.send_message( channel, boboTag( "BOBO MO BAWAL YAN" ) )
+    pass
 
 
 @client.command()
