@@ -52,7 +52,6 @@ async def on_message(message):
         elif random.randint( 1, 100 ) <= 10:
             msg = random.choice( messages )
             await client.send_message( message.channel, boboTag( msg ) )
-        await client.send_message( 'nsfw-livestream-lounge', 'bobo' )
 
 
 @client.event
