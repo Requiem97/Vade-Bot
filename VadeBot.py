@@ -37,7 +37,6 @@ async def on_message(message):
     UserID = message.author.id
     await client.process_commands( message )
     words = message.content.lower().split()
-    print(str(message.channel))
     if UserID != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
@@ -53,6 +52,7 @@ async def on_message(message):
         elif random.randint( 1, 100 ) <= 10:
             msg = random.choice( messages )
             await client.send_message( message.channel, boboTag( msg ) )
+        await client.send_message( 'nsfw-livestream-lounge', 'bobo' )
 
 
 @client.event
