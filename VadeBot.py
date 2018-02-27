@@ -43,6 +43,10 @@ async def on_message(message):
                 await client.send_message( message.channel, "THAT AIN'T A FUCKING QUESTION FFS" )
             else:
                 await client.send_message( message.channel, random.choice(ballReplies))
+        if message.content.lower() == "good vade":
+            await client.send_file(message.channel,'vadesmile.jpg')
+        if message.content.lower() == "bad vade":
+            await client.send_file(message.channel,'badvade.jpg')
         if findBobo( words ) == True:
             await client.send_message( message.channel, boboTag( "BOBO MO" ) )
         elif random.randint( 1, 100 ) <= 3:
