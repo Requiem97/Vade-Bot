@@ -49,7 +49,7 @@ async def on_message(message):
             await client.send_file(message.channel,'badvade.jpg')
         if findBobo( words ) == True:
             await client.send_message( message.channel, boboTag( "BOBO MO" ) )
-        elif random.randint( 1, 100 ) <= 3:
+        elif random.randint( 1, 100 ) <= 10:
             msg = random.choice( messages )
             await client.send_message( message.channel, boboTag( msg ) )
 
