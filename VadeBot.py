@@ -26,7 +26,7 @@ async def on_ready():
     print( 'Logged in as ' + client.user.name + ' (ID:' + client.user.id + ') | Connected to ' + str(
         len( client.servers ) ) + ' servers | Connected to ' + str(
         len( set( client.get_all_members() ) ) ) + ' users' )
-    return await client.change_presence( game=discord.Game( name='with her feelings' ) )
+    return await client.change_presence( game=discord.Game( name='with 71 people in a car' ) )
 
 
 @client.event
