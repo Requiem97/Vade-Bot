@@ -49,7 +49,7 @@ async def on_message(message):
             await client.send_file(message.channel,'src/badvade.jpg')
         if findBobo( words ) == True:
             await client.send_message( message.channel, boboTag( "BOBO MO" ) )
-        elif random.randint( 1, 100 ) <= 100:
+        elif random.randint( 1, 100 ) <= 3:
             msg = random.choice( messages )
             await client.send_message( message.channel, boboTag( msg ) )
 
@@ -60,12 +60,14 @@ async def on_command_error(self, error):
 
 @client.command()
 async def curse():
+    "Vade:tm: curses"
     msg = random.choice( messages )
     await client.say( boboTag( msg ) )
 
 
 @client.command()
 async def pics():
+    "Vade meme pics"
     await client.upload( random.choice( picList ) )
 
 
