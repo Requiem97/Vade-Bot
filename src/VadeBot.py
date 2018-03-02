@@ -4,8 +4,6 @@ import random
 import discord
 from discord.ext.commands import Bot
 
-import config
-
 client = Bot( description="FUCK THIS SHIT", command_prefix="v!", pm_help=False )
 messages = []
 with open( "src/curse.txt" ) as file:
