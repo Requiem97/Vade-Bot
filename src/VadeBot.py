@@ -12,7 +12,6 @@ picList = []
 for file in os.listdir( "src/" ):
     if file.endswith( ".png" ) or file.endswith( ".jpg" ):
         picList.append( 'src/{}'.format(file) )
-        print(str(file))
 ballReplies=[]
 with open( "src/8ballReplies.txt" ) as file:
     ballReplies = [line.strip() for line in file]
