@@ -66,7 +66,7 @@ async def curse():
 
 @client.command()
 async def pics():
-    "Vade meme pics"
+    "Vade\u2122 meme pics"
     await client.upload( random.choice( picList ) )
 
 
