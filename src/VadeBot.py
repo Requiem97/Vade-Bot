@@ -59,7 +59,7 @@ async def on_command_error(self, error):
 
 @client.command()
 async def curse():
-    "Vade:tm: curses"
+    "Vade\u2122 curses"
     msg = random.choice( messages )
     await client.say( boboTag( msg ) )
 
