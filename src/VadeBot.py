@@ -4,21 +4,23 @@ import random
 import discord
 from discord.ext.commands import Bot
 
+import config
 
 client = Bot( description="FUCK THIS SHIT", command_prefix="v!", pm_help=False )
-command_prefix = "v!"
 messages = []
-with open( "curse.txt" ) as file:
+with open( "src/curse.txt" ) as file:
     messages = [line.strip() for line in file]
 picList = []
-for file in os.listdir( "." ):
+for file in os.listdir( "src/" ):
     if file.endswith( ".png" ) or file.endswith( ".jpg" ):
-        picList.append( file )
+        picList.append( 'src/{}'.format(file) )
+        print(str(file))
 ballReplies=[]
-with open( "8ballReplies.txt" ) as file:
+with open( "src/8ballReplies.txt" ) as file:
     ballReplies = [line.strip() for line in file]
 UserID = ""
 channel = ""
+extensions=['Utility','Mathematics']
 
 
 @client.event
@@ -26,7 +28,7 @@ async def on_ready():
     print( 'Logged in as ' + client.user.name + ' (ID:' + client.user.id + ') | Connected to ' + str(
         len( client.servers ) ) + ' servers | Connected to ' + str(
         len( set( client.get_all_members() ) ) ) + ' users' )
-    return await client.change_presence( game=discord.Game( name='with 71 people in a car' ) )
+    return await client.change_presence( game=discord.Game( name='SOME SHITTY GAME' ) )
 
 
 @client.event
@@ -44,24 +46,18 @@ async def on_message(message):
             else:
                 await client.send_message( message.channel, random.choice(ballReplies))
         if message.content.lower() == "good vade":
-            await client.send_file(message.channel,'vadesmile.jpg')
+            await client.send_file(message.channel,'src/vadesmile.jpg')
         if message.content.lower() == "bad vade":
-            await client.send_file(message.channel,'badvade.jpg')
+            await client.send_file(message.channel,'src/badvade.jpg')
         if findBobo( words ) == True:
             await client.send_message( message.channel, boboTag( "BOBO MO" ) )
-        elif random.randint( 1, 100 ) <= 3:
+        elif random.randint( 1, 100 ) <= 100:
             msg = random.choice( messages )
             await client.send_message( message.channel, boboTag( msg ) )
-
 
 @client.event
 async def on_command_error(self, error):
     pass
-
-
-@client.command()
-async def ping():
-    await client.say( "I'M LAGGING FUCK MY LIFE" )
 
 
 @client.command()
@@ -73,55 +69,6 @@ async def curse():
 @client.command()
 async def pics():
     await client.upload( random.choice( picList ) )
-
-
-@client.command()
-async def add(x, y):
-    try:
-        z = int( x ) + int( y )
-        await client.say( '{:d} + {:d} is {:d} \nQuick mafs'.format( int( x ), int( y ), int( z ) ) )
-    except ValueError:
-        await client.say( "That ain't a number ffs" )
-
-
-@client.command()
-async def multiply(x, y):
-    try:
-        z = int( x ) * int( y )
-        await client.say( '{:d} * {:d} is {:d} \nQuick mafs'.format( int( x ), int( y ), int( z ) ) )
-    except ValueError:
-        await client.say( "That ain't a number ffs" )
-
-
-@client.command()
-async def subtract(x, y):
-    try:
-        z = int( x ) - int( y )
-        await client.say( '{:d} - {:d} is {:d} \nQuick mafs'.format( int( x ), int( y ), int( z ) ) )
-    except ValueError:
-        await client.say( "That ain't a number ffs" )
-
-
-@client.command()
-async def divide(x, y):
-    try:
-        z = float( x ) / float( y )
-        await client.say( '{:0.1f} / {:0.1f} is {:0.1f} \nQuick mafs'.format( float( x ), float( y ), float( z ) ) )
-    except ValueError:
-        await client.say( "That ain't a number ffs" )
-    except ZeroDivisionError:
-        await client.say( 'BOBO MO <@{!s}> DI PWEDE YAN'.format( UserID ) )
-
-
-@client.command()
-async def bros(user: discord.User = None):
-    try:
-        if user:
-            await client.say( 'Bros before hoes <@{!s}>'.format( user.id ) )
-        else:
-            await client.say( 'Bros before hoes' )
-    except:
-        await client.say( 'Bros before hoes' )
 
 
 def boboTag(mess):
@@ -137,6 +84,11 @@ def findBobo(words):
             return True
     return False
 
-
-client.run(os.environ['VadeBot_Token'])
-
+if __name__=='__main__':
+    for extension in extensions:
+        try:
+            client.load_extension('commands.{}'.format(extension))
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format('commands.{}'.format(extension), exc))
+client.run( os.environ['VadeBot_Token'] )
