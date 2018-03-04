@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
+from commands import VadeDeets
+
 class Mathematics:
     "Does some Math stuff"
-    client = discord.Client()
     def __init__(self, bot):
         self.bot = bot
     
@@ -44,7 +45,7 @@ class Mathematics:
         except ValueError:
             await self.bot.say( "That ain't a number ffs" )
         except ZeroDivisionError:
-            await self.bot.say( 'BOBO MO DI PWEDE YAN')
+            await self.bot.say( 'BOBO MO <@{!s}> DI PWEDE YAN'.format(VadeDeets.userID))
 
 def setup(bot):
     bot.add_cog(Mathematics(bot))
