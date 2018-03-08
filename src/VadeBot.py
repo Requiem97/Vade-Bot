@@ -3,7 +3,7 @@ import random
 
 import discord
 from discord.ext.commands import Bot
-from commands import VadeDeets
+from src.commands import VadeDeets
 
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)

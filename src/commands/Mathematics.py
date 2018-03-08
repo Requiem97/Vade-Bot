@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from commands import VadeDeets
+from src.commands import VadeDeets
 
 
 class Mathematics:
