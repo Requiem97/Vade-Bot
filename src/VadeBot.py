@@ -17,7 +17,7 @@ async def on_ready():
         len(client.servers)) + ' servers | Connected to ' + str(
         len(set(client.get_all_members()))) + ' users')
     #type 1 = playing, 2 = listeningto, 3 = watching
-    return await client.change_presence(game=discord.Game(name='anal child porn with children', type=3))
+    return await client.change_presence(game=discord.Game(name='anal child porn while fucking children', type=3))
 
 
 @client.event
@@ -42,7 +42,12 @@ async def on_message(message):
         elif random.randint(1, 100) <= 3:
             msg = random.choice(VadeDeets.messages)
             await client.send_message(message.channel, VadeDeets.boboTag(msg))
-            await client.send_message(message.author, "BOBO MO TANGINA")
+            if random.randint(1,100)<=25:
+                if random.randint(1,2) == 1:
+                    await client.send_message(message.author, "BOBO MO TANGINA")
+                else:
+                    msg = random.choice(VadeDeets.messages)
+                    await client.send_message(message.channel, VadeDeets.boboTag(msg))
 
 
 @client.event
@@ -57,4 +62,4 @@ if __name__ == '__main__':
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(
                 'commands.{}'.format(extension), exc))
-client.run(os.environ['VadeBot_Token'])
+    client.run(os.environ['VadeBot_Token'])
