@@ -37,7 +37,7 @@ async def on_message(message):
             await client.send_file(message.channel, 'src/pics/vadesmile.jpg')
         if message.content.lower() == "bad vade":
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
-        if VadeDeets.findBobo(words) == True:
+        if VadeDeets.findBobo(words):
             await client.send_message(message.channel, VadeDeets.boboTag("BOBO MO"))
         elif random.randint(1, 100) <= 3:
             msg = random.choice(VadeDeets.messages)
