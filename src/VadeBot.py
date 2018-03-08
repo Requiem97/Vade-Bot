@@ -41,7 +41,7 @@ async def on_message(message):
         elif random.randint(1, 100) <= 3:
             msg = random.choice(VadeDeets.messages)
             await client.send_message(message.channel, VadeDeets.boboTag(msg))
-            await client.send_message(message.author, msg)
+            await client.send_message(message.author, "BOBO MO TANGINA")
 
 
 @client.event
