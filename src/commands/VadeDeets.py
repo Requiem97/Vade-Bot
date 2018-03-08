@@ -1,11 +1,10 @@
-from commands import VadeDeets
 import os
 userID = '0'
 
 
 def boboTag(mess):
     if mess == "BOBO MO":
-        mess = 'BOBO MO <@{!s}>'.format(VadeDeets.userID)
+        mess = 'BOBO MO <@{!s}>'.format(userID)
         return mess
     return mess
 

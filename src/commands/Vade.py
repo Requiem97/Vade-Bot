@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-from commands import VadeDeets
+import VadeDeets
 
 
 class Vade:
