@@ -47,7 +47,7 @@ async def on_message(message):
                     await client.send_message(message.author, "BOBO MO TANGINA")
                 else:
                     msg = random.choice(VadeDeets.messages)
-                    await client.send_message(message.channel, VadeDeets.boboTag(msg))
+                    await client.send_message(message.author, VadeDeets.boboTag(msg))
 
 
 @client.event
