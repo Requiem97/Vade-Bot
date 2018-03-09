@@ -1,15 +1,11 @@
 import os
 import random
-
 import discord
 from discord.ext.commands import Bot
 from src.commands import VadeDeets
 
-
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
-
 extensions = ['Utility', 'Mathematics', 'Vade']
-
 
 @client.event
 async def on_ready():
@@ -19,11 +15,8 @@ async def on_ready():
     #type 1 = playing, 2 = listeningto, 3 = watching
     return await client.change_presence(game=discord.Game(name='anal child porn while fucking children', type=3))
 
-
 @client.event
 async def on_message(message):
-    global channel
-    channel = message.channel
     VadeDeets.userID = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
@@ -33,21 +26,21 @@ async def on_message(message):
                 await client.send_message(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
             else:
                 await client.send_message(message.channel, random.choice(VadeDeets.ballReplies))
-        if message.content.lower() == "good vade":
+        elif message.content.lower() == "good vade":
             await client.send_file(message.channel, 'src/pics/vadesmile.jpg')
-        if message.content.lower() == "bad vade":
+        elif message.content.lower() == "bad vade":
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
-        if VadeDeets.findBobo(words):
+        elif VadeDeets.findBobo(words):
             await client.send_message(message.channel, VadeDeets.boboTag("BOBO MO"))
-        elif random.randint(1, 100) <= 50:
+        else random.randint(1, 100) <= 3:
             msg = random.choice(VadeDeets.messages)
             await client.send_message(message.channel, VadeDeets.boboTag(msg))
-            if random.randint(1,2) == 1:
-                await client.send_message(message.author, "BOBO MO TANGINA")
-            else:
-                msg = random.choice(VadeDeets.messages)
-                await client.send_message(message.author, VadeDeets.boboTag(msg))
-
+            if random.randint(1,4) == 1:
+                if random.randint(1,2) == 1:
+                    await client.send_message(message.author, "BOBO MO TANGINA")
+                else:
+                    msg = random.choice(VadeDeets.messages)
+                    await client.send_message(message.author, VadeDeets.boboTag(msg))
 
 @client.event
 async def on_command_error(self, error):
