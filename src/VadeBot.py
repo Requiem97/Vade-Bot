@@ -32,14 +32,9 @@ async def on_message(message):
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
         elif VadeDeets.findBobo(words):
             await client.send_message(message.channel, VadeDeets.boboTag("BOBO MO"))
-        elif random.randint(1, 100) <= 50:
+        elif random.randint(1, 100) <= 3:
             msg = random.choice(VadeDeets.messages)
             await client.send_message(message.channel, VadeDeets.boboTag(msg))
-            if random.randint(1,2) == 1:
-                await client.send_message(message.author, "BOBO MO TANGINA")
-            else:
-                msg = random.choice(VadeDeets.messages)
-                await client.send_message(message.author, VadeDeets.boboTag(msg))
 
 @client.event
 async def on_command_error(self, error):
