@@ -14,7 +14,8 @@ class Vade:
     async def curse(self):
         "Vade\u2122 curses"
         msg = random.choice(VadeDeets.messages)
-        await self.bot.say(VadeDeets.boboTag(msg))
+        for line in VadeDeets.messages:
+            await self.bot.say(line)
 
     @commands.command()
     async def pics(self):
