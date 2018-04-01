@@ -12,8 +12,9 @@ async def on_ready():
     print('Logged in as ' + client.user.name + ' (ID:' + client.user.id + ') | Connected to ' + str(
         len(client.servers)) + ' servers | Connected to ' + str(
         len(set(client.get_all_members()))) + ' users')
+    server = discord.Server()
     #type 1 = playing, 2 = listeningto, 3 = watching
-    await client.change_nickname(discord.Server.get_member(405746416753967142), "Just Vade")
+    await client.change_nickname(server.get_member(405746416753967142), "Just Vade")
     return await client.change_presence(game=discord.Game(name='anal child porn while fucking children', type=3))
 
 @client.event
