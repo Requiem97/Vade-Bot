@@ -36,6 +36,7 @@ Get out of my head before I finish writing this poem.
 
 But a poem is never actually finished.
 It just stops moving."""
+    await self.bot.say(poem)
 
     @commands.command()
     async def pics(self):
