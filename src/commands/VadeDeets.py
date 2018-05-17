@@ -2,7 +2,7 @@ import os
 import glob
 
 userID = '0'
-file_list = glob.glob(os.path.join("src/files/poems","*.txt"))
+file_list = glob.glob(os.path.join(os.getcwd(),"src/files/prompts","*.txt"))
 
 
 def boboTag(mess):
@@ -20,8 +20,10 @@ def findBobo(words):
 
 
 messages = []
-#with open("src/files/poems/*.txt") as file:
-#    messages = [line.strip() for line in file]
+for path in file_list:
+    with open(path) as file:
+        lines = file.readlines()
+        messages.append(lines)
 for file_path in file_list:
     messages.append(line.strip() for line in file_path)
 picList = []
