@@ -21,7 +21,7 @@ def findBobo(words):
 
 messages = []
 for path in file_list:
-    with open(path, 'r') as file:
+    with open(path, 'rb') as file:
         lines = file.readlines()
         for line in lines:
             messages.append(line.replace('\n',''))
