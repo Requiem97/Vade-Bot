@@ -24,7 +24,7 @@ for path in file_list:
     with open(path, 'rb') as file:
         lines = file.readlines()
         for line in lines:
-            messages.append(line.replace('\n',""))
+            messages.append(line.replace('\n',''))
 for file_path in file_list:
     messages.append(line.strip() for line in file_path)
 picList = []
