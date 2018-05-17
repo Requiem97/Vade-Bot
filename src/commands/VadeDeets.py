@@ -1,5 +1,8 @@
 import os
+import glob
+
 userID = '0'
+file_list = glob.glob(os.path.join("src/files/poems","*.txt"))
 
 
 def boboTag(mess):
@@ -17,8 +20,10 @@ def findBobo(words):
 
 
 messages = []
-with open("src/files/*.txt") as file:
-    messages = [line.strip() for line in file]
+#with open("src/files/poems/*.txt") as file:
+#    messages = [line.strip() for line in file]
+for file_path in file_list:
+    messages.append(line.strip() for line in file_path)
 picList = []
 for file in os.listdir("src/pics"):
     if file.endswith(".png") or file.endswith(".jpg"):
