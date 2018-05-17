@@ -23,7 +23,8 @@ messages = []
 for path in file_list:
     with open(path) as file:
         lines = file.readlines()
-        messages.append(lines)
+        for line in lines:
+            messages.append(line)
 for file_path in file_list:
     messages.append(line.strip() for line in file_path)
 picList = []
