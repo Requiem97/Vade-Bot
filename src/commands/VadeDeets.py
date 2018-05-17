@@ -17,7 +17,7 @@ def findBobo(words):
 
 
 messages = []
-with open("src/files/poem.txt") as file:
+with open("src/files/*.txt") as file:
     messages = [line.strip() for line in file]
 picList = []
 for file in os.listdir("src/pics"):

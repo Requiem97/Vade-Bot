@@ -14,29 +14,7 @@ class Vade:
     async def curse(self):
         "Vade\u2122 curses"
         msg = random.choice(VadeDeets.messages)
-        poem = """ Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of my head. Get out of
-Get.
-Out.
-Of.
-My.
-Head.
-
-
-
-Get out of my head before I do what I know is best for you.
-Get out of my head before I listen to everything she said to me.
-Get out of my head before I show you how much I love you.
-Get out of my head before I finish writing this poem.
-
-
-
-
-
-
-
-But a poem is never actually finished.
-It just stops moving."""
-        await self.bot.say(poem)
+        await self.bot.say(msg)
 
     @commands.command()
     async def pics(self):
