@@ -25,8 +25,6 @@ for path in file_list:
         lines = file.readlines()
         for line in lines:
             messages.append(line)
-for file_path in file_list:
-    messages.append(line.strip() for line in file_path)
 picList = []
 for file in os.listdir("src/pics"):
     if file.endswith(".png") or file.endswith(".jpg"):
