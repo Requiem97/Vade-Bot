@@ -26,7 +26,7 @@ class Card:
         uncommonCards = [x.endswith("2") for x in VadeDeets.cardMap]
         rareCards = [x.endswith("3") for x in VadeDeets.cardMap]
         specialCards = [x.endswith("4") for x in VadeDeets.cardMap]
-        await self.bot.say("__**Common Cards**__\n", (x for x in commonCards))
+        await self.bot.say("__**Common Cards**__\n")
 
 
 def setup(bot):
