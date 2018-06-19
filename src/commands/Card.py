@@ -26,7 +26,7 @@ class Card:
         uncommonCards = [x.endswith("2") for x in VadeDeets.cardMap]
         rareCards = [x.endswith("3") for x in VadeDeets.cardMap]
         specialCards = [x.endswith("4") for x in VadeDeets.cardMap]
-        commonText = "__**Common Cards**__\n" + str(commonCards).strip("['']")
+        commonText = "__**Common Cards**__\n" + commonCards.strip("['']")
         await self.bot.say(commonText)
 
 
