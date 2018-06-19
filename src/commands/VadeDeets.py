@@ -25,10 +25,18 @@ for path in file_list:
         lines = file.readlines()
         for line in lines:
             messages.append(line)
+            
 picList = []
 for file in os.listdir("src/pics"):
     if file.endswith(".png") or file.endswith(".jpg"):
         picList.append('src/pics/{}'.format(file))
+
+cardList = []
+for file in os.listdir("src/cards"):
+    if file.endswith(".png") or file.endswith(".jpg"):
+        cardList.append('src/cards/{}'.format(file))
+cardMap = [x.replace("src/cards/", "").replace(".png", "").replace(".jpg", "") for x in cardList]
+
 ballReplies = []
 with open("src/files/8ballReplies.txt") as file:
     ballReplies = [line.strip() for line in file]
