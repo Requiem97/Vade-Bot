@@ -29,6 +29,10 @@ class Card:
         uncommonCards = [card for card in VadeDeets.cardMap if "2" in card]
         rareCards = [card for card in VadeDeets.cardMap if "3" in card]
         specialCards = [card for card in VadeDeets.cardMap if "4" in card]
+        commonCards.sort()
+        uncommonCards.sort()
+        rareCards.sort()
+        specialCards.sort()
         commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
         uncommonText = "__**Uncommon Cards**__\n" + str(uncommonCards).strip("[]")
         rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
