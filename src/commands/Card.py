@@ -9,7 +9,7 @@ class Card:
     
     @commands.group(pass_context=True)
     async def card (self, ctx):
-        "v!card view [card] to view specified card\nv!card list to view all cards"
+        "v!card view [card] to view specified card, and v!card list to view all cards"
         if ctx.invoked_subcommand is None:
             await self.bot.say("BAWAL YAN BOBO!")
 
@@ -26,6 +26,7 @@ class Card:
         uncommonCards = [x.endswith("2") for x in VadeDeets.cardMap]
         rareCards = [x.endswith("3") for x in VadeDeets.cardMap]
         specialCards = [x.endswith("4") for x in VadeDeets.cardMap]
+        commonText = "__**Common Cards**__\n" + str(commonCards).strip("['']")
         await self.bot.say("__**Common Cards**__\n")
 
 
