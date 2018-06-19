@@ -5,7 +5,7 @@ from discord.ext.commands import Bot
 from src.commands import VadeDeets
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
-extensions = ['Utility', 'Mathematics', 'Vade']
+extensions = ['Utility', 'Mathematics', 'Vade', 'Card']
 
 @client.event
 async def on_ready():
