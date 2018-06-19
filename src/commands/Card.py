@@ -25,10 +25,10 @@ class Card:
     @card.command()
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
-        commonCards = [card for card in VadeDeets.cardMap if card.endswith("1")]
-        uncommonCards = [card for card in VadeDeets.cardMap if card.endswith("2")]
-        rareCards = [card for card in VadeDeets.cardMap if card.endswith("3")]
-        specialCards = [card for card in VadeDeets.cardMap if card.endswith("4")]
+        commonCards = [card for card in VadeDeets.cardMap if "1" in card]
+        uncommonCards = [card for card in VadeDeets.cardMap if "2" in card]
+        rareCards = [card for card in VadeDeets.cardMap if "3" in card]
+        specialCards = [card for card in VadeDeets.cardMap if "4" in card]
         commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
         uncommonText = "__**Uncommon Cards**__\n" + str(uncommonCards).strip("[]")
         rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
