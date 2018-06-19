@@ -33,7 +33,7 @@ class Card:
         uncommonText = "__**Uncommon Cards**__\n" + str(uncommonCards).strip("[]")
         rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
         specialText = "__**Special Cards**__\n" + str(specialCards).strip("[]")
-        message = (commonText + "\n" + uncommonText + "\n" + rareText + "\n" + specialText).replace("'","")
+        message = (commonText + "\n\n" + uncommonText + "\n\n" + rareText + "\n\n" + specialText).replace("'","")
         await self.bot.say(message)
 
 
