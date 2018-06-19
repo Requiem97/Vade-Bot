@@ -9,28 +9,32 @@ class Card:
     
     @commands.group(pass_context=True)
     async def card (self, ctx):
-        "v!card view [card] to view specified card, and v!card list to view all cards"
+        "use v!card help to view more"
         if ctx.invoked_subcommand is None:
             await self.bot.say("BAWAL YAN BOBO!")
 
             
     @card.command()
     async def view(self, card):
+        "v!card view [card] to view the specified card, provided it's in the list"
         if card == None:
             pass
         else:
             await self.bot.upload(VadeDeets.cardList[VadeDeets.cardMap.index(card)])
+
     @card.command()
     async def list(self):
+        "v!card list to view the list of availbale card for viewing"
         commonCards = [card for card in VadeDeets.cardMap if card.endswith("1")]
         uncommonCards = [card for card in VadeDeets.cardMap if card.endswith("2")]
         rareCards = [card for card in VadeDeets.cardMap if card.endswith("3")]
         specialCards = [card for card in VadeDeets.cardMap if card.endswith("4")]
-        commonText = "__**Common Cards**__\n" + str(commonCards).strip("[']")
-        uncommonText = "__**Uncommon Cards**__\n" + str(uncommonCards).strip("[']")
-        rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[']")
-        specialText = "__**Special Cards**__\n" + str(specialCards).strip("[']")
-        await self.bot.say(commonText + "\n" + uncommonText + "\n" + rareText + "\n" + specialText)
+        commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
+        uncommonText = "__**Uncommon Cards**__\n" + str(uncommonCards).strip("[]")
+        rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
+        specialText = "__**Special Cards**__\n" + str(specialCards).strip("[]")
+        message = (commonText + "\n" + uncommonText + "\n" + rareText + "\n" + specialText).replace("'","")
+        await self.bot.say(message)
 
 
 def setup(bot):
