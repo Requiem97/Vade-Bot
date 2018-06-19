@@ -20,7 +20,7 @@ class Card:
         if card == None:
             pass
         else:
-            await self.bot.upload(VadeDeets.cardList[VadeDeets.cardMap.index(card)])
+            await self.bot.upload(VadeDeets.cardList[VadeDeets.cardMap.index(card.lower())])
 
     @card.command()
     async def list(self):
