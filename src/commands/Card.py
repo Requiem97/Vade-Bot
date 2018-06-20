@@ -1,4 +1,4 @@
-import discord
+import discord, random
 from discord.ext import commands
 from src.commands import VadeDeets
 
@@ -6,6 +6,12 @@ class Card:
     "Views some cards saved before the death of Bully Bot"
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command()
+    async def daily(self):
+        "Daily giveaway using the NOHK fund"
+        amount = random.randint(20,30)
+        await self.bot.say("You got " + str(amount) + " Php from the fund.")
     
     @commands.group(pass_context=True)
     async def card (self, ctx):
