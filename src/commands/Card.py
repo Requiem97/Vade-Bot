@@ -15,7 +15,7 @@ class Card:
     
     @commands.group(pass_context=True)
     async def card (self, ctx):
-        "use v!card help to view more"
+        "use v!help card to view more"
         if ctx.invoked_subcommand is None:
             await self.bot.say("BAWAL YAN BOBO!")
 
