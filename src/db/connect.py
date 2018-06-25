@@ -52,6 +52,9 @@ def canUse(userID):
     last_used = row[0][0]
     current = datetime.datetime.now()
     delta = current - last_used
-    VadeDeets.wait = str(datetime.timedelta(seconds = 75600 - delta.seconds))
+    VadeDeets.wait = str(datetime.timedelta(seconds = 86400 - delta.seconds))
     print("success", delta)
-    return False
+    if delta.days >= 1:
+        return True 
+    else:
+         return False
