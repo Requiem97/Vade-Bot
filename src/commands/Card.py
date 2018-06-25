@@ -22,6 +22,12 @@ class Card:
         else: 
             connect.createData(VadeDeets.userID, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
+
+    @commands.command()
+    async def fund(self):
+        "Get personal fund balance"
+        fund = connect.getFund(VadeDeets.userID)
+        await self.bot.say ("You currently got " + fund + " Php from the fund")
     
     @commands.group(pass_context=True)
     async def card (self, ctx):

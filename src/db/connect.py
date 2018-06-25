@@ -58,3 +58,14 @@ def canUse(userID):
         return True 
     else:
          return False
+
+def getFund(userID):
+    global conn
+    cur=conn.cursor()
+    if hasData(userID):
+        cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
+        row = cur.fetchall()
+        fund = row[0][0]
+        return fund
+    else:
+        return 0
