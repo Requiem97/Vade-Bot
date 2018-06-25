@@ -15,6 +15,7 @@ def connect():
 
 
 def uploadData(userID, amount, dt):
+    print("updating data")
     global conn
     cur = conn.cursor()
     cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
@@ -23,19 +24,25 @@ def uploadData(userID, amount, dt):
     fund += amount
     cur.execute("UPDATE bot.daily SET fund = %s, last_used = %s where user_id = %s;",
                 (fund, dt, str(userID),))
+    print("success")
 
 def hasData(userId):
+    print("checking data")
     global conn
     cur=conn.cursor
     cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(userId),))
+    print("success")
     return True if cur.fetchone() else False
 
 def createData(userID, amount, dt):
+    print("creating data")
     global conn
     cur=conn.cursor
     cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(userID), amount, dt,))
+    print("success")
 
 def canUse(userID):
+    print("checking data")
     global conn
     cur=conn.cursor
     cur.execute("SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
@@ -44,4 +51,5 @@ def canUse(userID):
     current = datetime.datetime.now()
     delta = current - last_used
     VadeDeets.wait = str(datetime.timedelta(seconds = 75600 - delta.seconds))
+    print("success")
     return True if (delta//3600 > 21 or delta.days > 0) else False
