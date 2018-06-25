@@ -18,7 +18,7 @@ class Card:
                 connect.uploadData(VadeDeets.userID, amount, date)
                 await self.bot.say("You got " + str(amount) + " Php from the fund.")
             else:
-                await self.bot.say("Please try again later." )
+                await self.bot.say("Please try again in " + VadeDeets.wait)
         else: 
             connect.createData(VadeDeets.userID, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
