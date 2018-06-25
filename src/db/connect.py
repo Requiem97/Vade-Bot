@@ -42,7 +42,7 @@ def createData(userID, amount, dt):
     print("success")
 
 def canUse(userID):
-    print("checking data")
+    print("checking if v!daily is allowed")
     global conn
     cur=conn.cursor
     cur.execute("SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
