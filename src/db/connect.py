@@ -69,7 +69,7 @@ def getFund(userID):
         row = cur.fetchall()
         fund = row[0][0]
         print(fund)
-        return fund
+        VadeDeets.fund = fund
     else:
         print("no data")
-        return 0
+        VadeDeets.fund = 0
