@@ -3,16 +3,14 @@ import random
 import discord
 from discord.ext.commands import Bot
 from src.commands import VadeDeets
+from src.db import connect
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'Card']
 
 @client.event
 async def on_ready():
-    try:
-        print(os.environ['DATABASE_URL'])
-    except KeyError: 
-        print("NO URL")
+    connect.connect()
     print('Logged in as ' + client.user.name + ' (ID:' + client.user.id + ') | Connected to ' + str(
         len(client.servers)) + ' servers | Connected to ' + str(
         len(set(client.get_all_members()))) + ' users')
