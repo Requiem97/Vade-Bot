@@ -16,6 +16,7 @@ def connect():
 
 def uploadData(userID, amount, dt):
     print("updating data")
+    connect()
     global conn
     cur = conn.cursor()
     cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
@@ -28,6 +29,7 @@ def uploadData(userID, amount, dt):
 
 def hasData(userId):
     print("checking data")
+    connect()
     global conn
     cur=conn.cursor
     cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(userId),))
@@ -36,6 +38,7 @@ def hasData(userId):
 
 def createData(userID, amount, dt):
     print("creating data")
+    connect()
     global conn
     cur=conn.cursor
     cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(userID), amount, dt,))
@@ -43,6 +46,7 @@ def createData(userID, amount, dt):
 
 def canUse(userID):
     print("checking if v!daily is allowed")
+    connect()
     global conn
     cur=conn.cursor
     cur.execute("SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
