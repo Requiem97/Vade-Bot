@@ -1,8 +1,8 @@
-import os
-import glob
+import os, glob, datetime
 
 userID = '0'
 file_list = glob.glob(os.path.join(os.getcwd(),"src/files/prompts","*.txt"))
+wait = None
 
 
 def boboTag(mess):
