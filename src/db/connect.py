@@ -53,7 +53,7 @@ def canUse(userID):
     current = datetime.datetime.now()
     delta = current - last_used
     VadeDeets.wait = str(datetime.timedelta(seconds = 75600 - delta.seconds))
-    print("success")
+    print("success", delta)
     if (delta//3600 >= 21 or delta.days > 0):
         print("Allowed")
         return True
