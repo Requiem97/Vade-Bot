@@ -31,7 +31,7 @@ def hasData(userId):
     print("checking data")
     connect()
     global conn
-    cur=conn.cursor
+    cur=conn.cursor()
     cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(userId),))
     print("success")
     return True if cur.fetchone() else False
@@ -40,7 +40,7 @@ def createData(userID, amount, dt):
     print("creating data")
     connect()
     global conn
-    cur=conn.cursor
+    cur=conn.cursor()
     cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(userID), amount, dt,))
     print("success")
 
@@ -48,7 +48,7 @@ def canUse(userID):
     print("checking if v!daily is allowed")
     connect()
     global conn
-    cur=conn.cursor
+    cur=conn.cursor()
     cur.execute("SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
     row = cur.fetchall()
     last_used = row[0][0]
