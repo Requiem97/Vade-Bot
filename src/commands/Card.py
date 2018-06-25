@@ -13,13 +13,12 @@ class Card:
         "Daily giveaway using the NOHK fund"
         date = datetime.datetime.now()
         amount = random.randint(20,30)
-        delta = VadeDeets.wait
         if connect.hasData(VadeDeets.userID):
             if connect.canUse(VadeDeets.userID):
                 connect.uploadData(VadeDeets.userID, amount, date)
                 await self.bot.say("You got " + str(amount) + " Php from the fund.")
             else:
-                await self.bot.say("Please try again in " + VadeDeets.wait )
+                await self.bot.say("Please try again later." )
         else: 
             connect.createData(VadeDeets.userID, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
