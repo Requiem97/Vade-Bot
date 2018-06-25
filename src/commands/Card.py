@@ -1,6 +1,7 @@
-import discord, random
+import discord, random, datetime
 from discord.ext import commands
 from src.commands import VadeDeets
+from src.db import connect
 
 class Card:
     "Views some cards saved before the death of Bully Bot"
@@ -10,8 +11,13 @@ class Card:
     @commands.command()
     async def daily(self):
         "Daily giveaway using the NOHK fund"
-        amount = random.randint(20,30)
-        await self.bot.say("You got " + str(amount) + " Php from the fund.")
+        date = datetime.datetime.now()
+        if connect.hasData(VadeDeets.userID):
+            connect.createData(VadeDeets.userID, 0, date)
+        else: 
+            amount = random.randint(20,30)
+            connect.createData(VadeDeets.userID, amount, date)
+            await self.bot.say("You got " + str(amount) + " Php from the fund.")
     
     @commands.group(pass_context=True)
     async def card (self, ctx):
