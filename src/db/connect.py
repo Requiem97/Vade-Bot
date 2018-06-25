@@ -25,6 +25,7 @@ def uploadData(userID, amount, dt):
     fund += amount
     cur.execute("UPDATE bot.daily SET fund = %s, last_used = %s where user_id = %s;",
                 (fund, dt, str(userID),))
+    conn.commit()
     print("success")
 
 def hasData(userId):
@@ -42,6 +43,7 @@ def createData(userID, amount, dt):
     global conn
     cur=conn.cursor()
     cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(userID), amount, dt,))
+    conn.commit()
     print("success")
 
 def canUse(userID):
