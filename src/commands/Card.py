@@ -27,7 +27,7 @@ class Card:
     async def fund(self):
         "Get personal fund balance"
         #fund = connect.getFund(VadeDeets.userID)
-        await self.bot.say ("You currently got " + str(VadeDeets.fund) + " Php from the fund")
+        await self.bot.say ("You currently got " + VadeDeets.fund + " Php from the fund")
     
     @commands.group(pass_context=True)
     async def card (self, ctx):
