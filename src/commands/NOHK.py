@@ -66,21 +66,31 @@ class NOHK:
         await self.bot.say(message)
 
     @commands.command()
-    async def utang(self):
+    async def utang(self, member):
         scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
         service_account_info = os.environ['Google_Key']
-        print(service_account_info)
-        print()
         service_account_info = json.loads(service_account_info)
-        print(service_account_info["client_x509_cert_url"])
         credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
-        
         file = gspread.authorize(credentials) # authenticate with Google
         sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
         worksheet = sheet.get_worksheet(0)
-        val = worksheet.cell(18, 2).value
-        print(val)
-        await self.bot.say("Under Testing")
+        users = {
+            'alkaeid': 14,
+            'arvin': 15,
+            'marx': 16,
+            'otaCom': 17,
+            'requiem': 18,
+            'rich': 19,
+            'ruo': 20,
+            'vade': 21
+        }
+        try:
+            num = users[member.lower()]
+            val = worksheet.cell(num, 2).value
+            print(val)
+            await self.bot.say("Your current debt is " + str(val))
+        except:
+            await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
 
 
 def setup(bot):
