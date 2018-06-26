@@ -76,32 +76,36 @@ class NOHK:
     @commands.command()
     async def utang(self, member=None):
         "View the current debt of a member in the fund"
+
         if member == None:
             await self.bot.say("Specify a fund subscriber dumbass")
-        else:
-            scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-            service_account_info = json.loads(os.environ['Google_Key'])
-            credentials = ServiceAccountCredentials._from_parsed_json_keyfile(
-                service_account_info, scope)
-            file = gspread.authorize(credentials)
-            sheet = file.open_by_key(os.environ['Sheet_ID'])
-            worksheet = sheet.get_worksheet(0)
-            users = {
-                'alkaeid': 14,
-                'arvin': 15,
-                'marx': 16,
-                'otacom': 17,
-                'requiem': 18,
-                'rich': 19,
-                'ruo': 20,
-                'vade': 21
-            }
-            try:
-                num = users[member.lower()]
-                val = worksheet.cell(num, 2).value
-                await self.bot.say(member + "'s current debt is " + str(val))
-            except:
-                await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
+            return
+
+        scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+        service_account_info = json.loads(os.environ['Google_Key'])
+        credentials = ServiceAccountCredentials._from_parsed_json_keyfile(
+            service_account_info, scope)
+        file = gspread.authorize(credentials)
+        sheet = file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
+                                 else os.environ['Sheet_ID_2018'])
+        worksheet = sheet.get_worksheet(0)
+        users = {
+            'alkaeid': 14,
+            'arvin': 15,
+            'marx': 16,
+            'otacom': 17,
+            'Harold': 17
+            'requiem': 18,
+            'rich': 19,
+            'ruo': 20,
+            'vade': 21
+        }
+        try:
+            num = users[member.lower()]
+            val = worksheet.cell(num, 2).value
+            await self.bot.say(member + "'s current debt is " + str(val))
+        except:
+            await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
 
 
 def setup(bot):
