@@ -84,7 +84,7 @@ class NOHK:
         if ctx.invoked_subcommand == None:
             await self.bot.say("__**NOHK Fund commands**__\n" +
                                "`v!fund utang [member]` - views debt of specified member.\n" +
-                               "`v!fund total` - views the current on hand ammount.\n\n" +
+                               "`v!fund total` - views the current on hand amount.\n\n" +
                                "use `v!balance`  to view your v!daily total")
 
     @fund.command()
