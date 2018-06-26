@@ -69,9 +69,9 @@ class NOHK:
     async def utang(self):
         scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
         service_account_info = os.environ['Google_Key']
+        print(os.environ['Google_Key'])
         service_account_info = json.loads(service_account_info)
         credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
-        print(service_account_info["type"])
         
         file = gspread.authorize(credentials) # authenticate with Google
         sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
