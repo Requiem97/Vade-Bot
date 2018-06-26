@@ -91,7 +91,7 @@ class NOHK:
 
     @fund.command()
     async def utang(self, member=None):
-        "View the current debt of a member in the fund"
+        "views debt of a sepcified member"
 
         if member == None:
             await self.bot.say("Specify a fund subscriber dumbass")
@@ -120,6 +120,7 @@ class NOHK:
 
     @fund.command()
     async def total(self):
+        "views the current on hand ammount."
         sheet = self.file.open_by_key(os.environ['Sheet_ID_2018'])
         worksheet = sheet.get_worksheet(0)
         val = worksheet.cell(25, 1).value
