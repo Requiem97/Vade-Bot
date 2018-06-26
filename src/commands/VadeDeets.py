@@ -1,7 +1,9 @@
-import os, glob, datetime
+import os
+import glob
+import datetime
 
 userID = '0'
-file_list = glob.glob(os.path.join(os.getcwd(),"src/files/prompts","*.txt"))
+file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
 wait = None
 fund = ""
 
@@ -36,7 +38,8 @@ cardList = []
 for file in os.listdir("src/cards"):
     if file.endswith(".png") or file.endswith(".jpg"):
         cardList.append('src/cards/{}'.format(file))
-cardMap = [x.replace("src/cards/", "").replace(".png", "").replace(".jpg", "").lower() for x in cardList]
+cardMap = [x.replace("src/cards/", "").replace(".png",
+                                               "").replace(".jpg", "").lower() for x in cardList]
 
 ballReplies = []
 with open("src/files/8ballReplies.txt") as file:

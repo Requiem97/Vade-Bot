@@ -63,7 +63,6 @@ I understand people really well, so don't be afraid to share your unique needs w
 Nothing would make me happier than being the perfect sugar daddy for you.""")
         for line in quote:
             await self.bot.say(line)
-        
 
 
 def setup(bot):

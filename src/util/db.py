@@ -1,5 +1,7 @@
-import os, psycopg2, datetime
-from src.commands import VadeDeets 
+import os
+import psycopg2
+import datetime
+from src.commands import VadeDeets
 
 conn = None
 cur = None
@@ -18,7 +20,8 @@ def connect():
 
 def uploadData(userID, amount, dt):
     global conn, cur
-    cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
+    cur.execute("SELECT fund from bot.daily WHERE user_id = %s;",
+                (str(userID),))
     row = cur.fetchall()
     fund = int(row[0][0])
     fund += amount
@@ -26,37 +29,43 @@ def uploadData(userID, amount, dt):
                 (fund, dt, str(userID),))
     conn.commit()
 
+
 def hasData(userId):
     global conn, cur
     cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(userId),))
     return True if cur.fetchone() else False
 
+
 def createData(userID, amount, dt):
     global conn, cur
-    cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(userID), amount, dt,))
+    cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(
+        userID), amount, dt,))
     conn.commit()
+
 
 def canUse(userID):
     global conn, cur
-    cur.execute("SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
+    cur.execute(
+        "SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
     row = cur.fetchall()
     last_used = row[0][0]
     current = datetime.datetime.now()
     delta = current - last_used
-    VadeDeets.wait = str(datetime.timedelta(seconds = 75600 - delta.seconds))
+    VadeDeets.wait = str(datetime.timedelta(seconds=75600 - delta.seconds))
     delta = current.timestamp() - last_used.timestamp()
     if delta >= 75600:
-        return True 
+        return True
     else:
-         return False
+        return False
+
 
 def getFund(userID):
     global conn, cur
     if hasData(userID):
-        cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
+        cur.execute(
+            "SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
         row = cur.fetchall()
         fund = row[0][0]
-        print(fund)
         VadeDeets.fund = str(fund)
         return fund
     else:

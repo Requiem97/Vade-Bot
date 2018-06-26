@@ -3,19 +3,21 @@ import random
 import discord
 from discord.ext.commands import Bot
 from src.commands import VadeDeets
-from src.db import connect
+from src.util import db
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
 
+
 @client.event
 async def on_ready():
-    connect.connect()
+    db.connect()
     print('Logged in as ' + client.user.name + ' (ID:' + client.user.id + ') | Connected to ' + str(
         len(client.servers)) + ' servers | Connected to ' + str(
         len(set(client.get_all_members()))) + ' users')
-    #type 1 = playing, 2 = listeningto, 3 = watching
+    # type 1 = playing, 2 = listeningto, 3 = watching
     return await client.change_presence(game=discord.Game(name='anal child porn while fucking children', type=3))
+
 
 @client.event
 async def on_message(message):
