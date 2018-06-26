@@ -20,7 +20,8 @@ class NOHK:
                 connect.uploadData(VadeDeets.userID, amount, date)
                 await self.bot.say("You got " + str(amount) + " Php from the fund.")
             else:
-                await self.bot.say("Please try again in " + VadeDeets.wait)
+                wait = VadeDeets.wait.split(":")
+                await self.bot.say("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
         else: 
             connect.createData(VadeDeets.userID, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
