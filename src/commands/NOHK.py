@@ -15,6 +15,11 @@ class NOHK:
 
     def __init__(self, bot):
         self.bot = bot
+        self.scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+        self.service_account_info = json.loads(os.environ['Google_Key'])
+        self.credentials = ServiceAccountCredentials._from_parsed_json_keyfile(
+            self.service_account_info, self.scope)
+        self.file = gspread.authorize(self.credentials)
 
     @commands.command()
     async def daily(self):
@@ -33,7 +38,7 @@ class NOHK:
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
 
     @commands.command()
-    async def fund(self):
+    async def balance(self):
         "Get personal fund balance"
         db.getFund(VadeDeets.userID)
         fund = db.getFund(VadeDeets.userID)
@@ -73,7 +78,17 @@ class NOHK:
                    rareText + "\n\n" + specialText).replace("'", "")
         await self.bot.say(message)
 
-    @commands.command()
+    @commands.group(pass_context=True)
+    async def fund(self, ctx):
+        "NOHK fund-related command group. v!help fund to view more"
+        if ctx.invoked_subcommand == None:
+            await self.bot.say("""__**NOHK Fund commands**__
+            v!fund utang [member] - views debt of specified member.
+            v!fund total - views the current on hand ammount.
+            
+            use `v!balance` to view your v!daily total""")
+
+    @fund.command()
     async def utang(self, member=None):
         "View the current debt of a member in the fund"
 
@@ -81,13 +96,8 @@ class NOHK:
             await self.bot.say("Specify a fund subscriber dumbass")
             return
 
-        scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-        service_account_info = json.loads(os.environ['Google_Key'])
-        credentials = ServiceAccountCredentials._from_parsed_json_keyfile(
-            service_account_info, scope)
-        file = gspread.authorize(credentials)
-        sheet = file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
-                                 else os.environ['Sheet_ID_2018'])
+        sheet = self.file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
+                                      else os.environ['Sheet_ID_2018'])
         worksheet = sheet.get_worksheet(0)
         users = {
             'alkaeid': 14,
@@ -106,6 +116,13 @@ class NOHK:
             await self.bot.say(member + "'s current debt is " + str(val))
         except:
             await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
+
+    @fund.command()
+    async def total(self):
+        sheet = self.file.open_by_key(os.environ['Sheet_ID_2018'])
+        worksheet = sheet.get_worksheet(0)
+        val = worksheet.cell(25, 1).value
+        await self.bot.say("Current amount on hand is " + str(val) + " Php.")
 
 
 def setup(bot):
