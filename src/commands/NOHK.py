@@ -51,10 +51,10 @@ class NOHK:
     @card.command()
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
-        commonCards = [card for card in VadeDeets.cardMap if "1" in card]
-        uncommonCards = [card for card in VadeDeets.cardMap if "2" in card]
-        rareCards = [card for card in VadeDeets.cardMap if "3" in card]
-        specialCards = [card for card in VadeDeets.cardMap if "4" in card]
+        commonCards = [card.title() for card in VadeDeets.cardMap if "1" in card]
+        uncommonCards = [card.title() for card in VadeDeets.cardMap if "2" in card]
+        rareCards = [card.title() for card in VadeDeets.cardMap if "3" in card]
+        specialCards = [card.title() for card in VadeDeets.cardMap if "4" in card]
         commonCards.sort()
         uncommonCards.sort()
         rareCards.sort()
@@ -70,11 +70,10 @@ class NOHK:
     async def utang(self, member):
         "View the current debt of a member in the fund"
         scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-        service_account_info = os.environ['Google_Key']
-        service_account_info = json.loads(service_account_info)
+        service_account_info = json.loads(os.environ['Google_Key'])
         credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
-        file = gspread.authorize(credentials) # authenticate with Google
-        sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
+        file = gspread.authorize(credentials)
+        sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY')
         worksheet = sheet.get_worksheet(0)
         users = {
             'alkaeid': 14,
@@ -89,7 +88,6 @@ class NOHK:
         try:
             num = users[member.lower()]
             val = worksheet.cell(num, 2).value
-            print(val)
             await self.bot.say(member + "'s current debt is " + str(val))
         except:
             await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
