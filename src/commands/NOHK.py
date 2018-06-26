@@ -67,6 +67,7 @@ class NOHK:
 
     @commands.command()
     async def utang(self, member):
+        "View the current debt of a member in the fund"
         scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
         service_account_info = os.environ['Google_Key']
         service_account_info = json.loads(service_account_info)
@@ -78,7 +79,7 @@ class NOHK:
             'alkaeid': 14,
             'arvin': 15,
             'marx': 16,
-            'otaCom': 17,
+            'otacom': 17,
             'requiem': 18,
             'rich': 19,
             'ruo': 20,
