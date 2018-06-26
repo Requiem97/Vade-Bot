@@ -17,7 +17,6 @@ def connect():
 
 
 def uploadData(userID, amount, dt):
-    print("updating data")
     global conn, cur
     cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
     row = cur.fetchall()
@@ -26,24 +25,18 @@ def uploadData(userID, amount, dt):
     cur.execute("UPDATE bot.daily SET fund = %s, last_used = %s where user_id = %s;",
                 (fund, dt, str(userID),))
     conn.commit()
-    print("success")
 
 def hasData(userId):
-    print("checking data")
     global conn, cur
     cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(userId),))
-    print("success")
     return True if cur.fetchone() else False
 
 def createData(userID, amount, dt):
-    print("creating data")
     global conn, cur
     cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(userID), amount, dt,))
     conn.commit()
-    print("success")
 
 def canUse(userID):
-    print("checking if v!daily is allowed")
     global conn, cur
     cur.execute("SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
     row = cur.fetchall()
@@ -52,17 +45,14 @@ def canUse(userID):
     delta = current - last_used
     VadeDeets.wait = str(datetime.timedelta(seconds = 75600 - delta.seconds))
     delta = current.timestamp() - last_used.timestamp()
-    print("success", delta)
     if delta >= 75600:
         return True 
     else:
          return False
 
 def getFund(userID):
-    print("checking fund data")
     global conn, cur
     if hasData(userID):
-        print("has data")
         cur.execute("SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
         row = cur.fetchall()
         fund = row[0][0]
@@ -70,6 +60,5 @@ def getFund(userID):
         VadeDeets.fund = str(fund)
         return fund
     else:
-        print("no data")
         VadeDeets.fund = str(0)
         return 0
