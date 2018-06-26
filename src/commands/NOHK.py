@@ -69,7 +69,7 @@ class NOHK:
     @commands.command()
     async def utang(self, member = None):
         "View the current debt of a member in the fund"
-        if member = None:
+        if member == None:
             await self.bot.say("Specify a fund subscriber dumbass")
         else:
             scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
