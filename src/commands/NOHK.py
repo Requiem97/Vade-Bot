@@ -68,7 +68,7 @@ class NOHK:
     @commands.command()
     async def utang(self):
         scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-        service_account_info = """%s""" % (os.environ['Google_Key'])
+        service_account_info = "%s" % (str(os.environ['Google_Key']))
         print(service_account_info)
         print()
         service_account_info = json.loads(service_account_info)
