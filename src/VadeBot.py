@@ -38,10 +38,6 @@ async def on_message(message):
             msg = random.choice(VadeDeets.messages)
             await client.send_message(message.channel, VadeDeets.boboTag(msg))
 
-@client.event
-async def on_command_error(self, error):
-    pass
-
 if __name__ == '__main__':
     for extension in extensions:
         try:
