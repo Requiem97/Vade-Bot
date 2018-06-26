@@ -24,7 +24,7 @@ class NOHK:
                 await self.bot.say("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
         else: 
             connect.createData(VadeDeets.userID, amount, date)
-            await self.bot.say("You got " + str(amount) + " Php from the fund.")
+            await self.bot.say("You have " + str(amount) + " Php.")
 
     @commands.command()
     async def fund(self):
