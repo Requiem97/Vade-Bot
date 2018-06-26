@@ -94,7 +94,7 @@ class NOHK:
             'arvin': 15,
             'marx': 16,
             'otacom': 17,
-            'Harold': 17
+            'harold': 17
             'requiem': 18,
             'rich': 19,
             'ruo': 20,
