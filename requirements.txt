@@ -2,4 +2,4 @@ discord.py==0.16.12
 asyncio
 psycopg2-binary
 gspread
-oauth2client
+--upgrade oauth2client
