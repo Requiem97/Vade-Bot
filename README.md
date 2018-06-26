@@ -6,6 +6,7 @@ Vade Bot is a bot modeled after a good friend of the creator. It is designed to 
 - Perform basic arithmetic
 - View a random message from the curse list.
 - View a random Vade pic
+- View current NOHK fund debt
 - View saved cards
 - 8ball feature (use v!8ball, command is not listed in v!help atm)
 
