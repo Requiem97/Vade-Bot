@@ -70,14 +70,14 @@ class NOHK:
         scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
         service_account_info = os.environ['Google_Key']
         service_account_info = json.loads(service_account_info)
-        print(service_account_info)
         credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
         print(service_account_info["type"])
+        
         file = gspread.authorize(credentials) # authenticate with Google
         sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
         worksheet = sheet.get_worksheet(0)
         val = worksheet.cell(18, 2).value
-        await self.bot.say(val)
+        await self.bot.say("Your current debt is " + str(val))
 
 
 def setup(bot):
