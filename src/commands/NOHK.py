@@ -61,14 +61,16 @@ class NOHK:
     @card.command()
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
+        cardList = VadeDeets.cardMap
+        cardList.sort()
         commonCards = [card.title()
-                       for card in VadeDeets.cardMap if "1" in card].sort()
+                       for card in cardList if "1" in card]
         uncommonCards = [card.title()
-                         for card in VadeDeets.cardMap if "2" in card].sort()
+                         for card in cardList if "2" in card]
         rareCards = [card.title()
-                     for card in VadeDeets.cardMap if "3" in card].sort()
+                     for card in cardList if "3" in card]
         specialCards = [card.title()
-                        for card in VadeDeets.cardMap if "4" in card].sort()
+                        for card in cardList if "4" in card]
         commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
         uncommonText = "__**Uncommon Cards**__\n" + \
             str(uncommonCards).strip("[]")
