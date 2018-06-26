@@ -6,7 +6,7 @@ from src.commands import VadeDeets
 from src.db import connect
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
-extensions = ['Utility', 'Mathematics', 'Vade', 'Card']
+extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
 
 @client.event
 async def on_ready():

@@ -1,9 +1,11 @@
-import discord, random, datetime
+import discord, random, datetime, json, gspread, os
 from discord.ext import commands
 from src.commands import VadeDeets
 from src.db import connect
 
-class Card:
+from oauth2client.service_account import ServiceAccountCredentials
+
+class NOHK:
     "Views some cards saved before the death of Bully Bot"
     def __init__(self, bot):
         self.bot = bot
@@ -63,6 +65,21 @@ class Card:
         message = (commonText + "\n\n" + uncommonText + "\n\n" + rareText + "\n\n" + specialText).replace("'","")
         await self.bot.say(message)
 
+    @commands.command()
+    async def utang(self):
+        scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+
+        service_account_info = os.environ['Google_Key']
+        service_account_info = json.loads(service_account_info)
+        #credentials = ServiceAccountCredentials.from_json_keyfile_name("My Project.json", scope)
+        credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
+        #print(credentials)
+        file = gspread.authorize(credentials) # authenticate with Google
+        sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
+        worksheet = sheet.get_worksheet(0)
+        val = worksheet.cell(18, 2).value
+        self.bot.say(val)
+
 
 def setup(bot):
-    bot.add_cog(Card(bot))
+    bot.add_cog(NOHK(bot))
