@@ -68,6 +68,8 @@ def getFund(userID):
         fund = row[0][0]
         print(fund)
         VadeDeets.fund = str(fund)
+        return fund
     else:
         print("no data")
         VadeDeets.fund = str(0)
+        return 0
