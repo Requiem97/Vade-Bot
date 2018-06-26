@@ -89,7 +89,7 @@ class NOHK:
             num = users[member.lower()]
             val = worksheet.cell(num, 2).value
             print(val)
-            await self.bot.say("Your current debt is " + str(val))
+            await self.bot.say(member + "'s current debt is " + str(val))
         except:
             await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
 
