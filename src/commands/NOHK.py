@@ -73,12 +73,13 @@ class NOHK:
         print()
         service_account_info = json.loads(service_account_info)
         print(service_account_info["client_x509_cert_url"])
-        #credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
+        credentials = ServiceAccountCredentials._from_parsed_json_keyfile(service_account_info, scope)
         
-        #file = gspread.authorize(credentials) # authenticate with Google
-        #sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
-        #worksheet = sheet.get_worksheet(0)
-        #val = worksheet.cell(18, 2).value
+        file = gspread.authorize(credentials) # authenticate with Google
+        sheet = file.open_by_key('1HPtHR_HRqH-MmxXYUwwkecTInLYiRdvQLN-Wq4pLeRY') # open sheet
+        worksheet = sheet.get_worksheet(0)
+        val = worksheet.cell(18, 2).value
+        print(val)
         await self.bot.say("Under Testing")
 
 
