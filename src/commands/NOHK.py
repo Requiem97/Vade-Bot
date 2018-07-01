@@ -96,25 +96,26 @@ class NOHK:
         if member == None:
             await self.bot.say("Specify a fund subscriber dumbass")
             return
-
-        sheet = self.file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
-                                      else os.environ['Sheet_ID_2018'])
-        worksheet = sheet.get_worksheet(0)
-        users = {
-            'alkaeid': 14,
-            'arvin': 15,
-            'marx': 16,
-            'otacom': 17,
-            'harold': 17,
-            'requiem': 18,
-            'rich': 19,
-            'ruo': 20,
-            'vade': 21
-        }
         try:
+            sheet = self.file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
+                                          else os.environ['Sheet_ID_2018'])
+            worksheet = sheet.get_worksheet(0)
+            users = {
+                'alkaeid': 14,
+                'arvin': 15,
+                'marx': 16,
+                'otacom': 17,
+                'harold': 17,
+                'requiem': 18,
+                'rich': 19,
+                'ruo': 20,
+                'vade': 21
+            }
             num = users[member.lower()]
             val = worksheet.cell(num, 2).value
             await self.bot.say(member + "'s current debt is " + str(val))
+        except gspread.exceptions.APIError:
+            await self.bot.say("Error with Google API key. Please contact the developer <@{!s}>".format(os.environ['DEV_ID']))
         except:
             await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
 
