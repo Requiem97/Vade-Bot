@@ -15,11 +15,7 @@ class NOHK:
 
     def __init__(self, bot):
         self.bot = bot
-        self.scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-        self.service_account_info = json.loads(os.environ['Google_Key'])
-        self.credentials = ServiceAccountCredentials._from_parsed_json_keyfile(
-            self.service_account_info, self.scope)
-        self.file = gspread.authorize(self.credentials)
+        self.set_credentials()
 
     @commands.command()
     async def daily(self):
@@ -97,25 +93,13 @@ class NOHK:
             await self.bot.say("Specify a fund subscriber dumbass")
             return
         try:
-            sheet = self.file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
-                                          else os.environ['Sheet_ID_2018'])
-            worksheet = sheet.get_worksheet(0)
-            users = {
-                'alkaeid': 14,
-                'arvin': 15,
-                'marx': 16,
-                'otacom': 17,
-                'harold': 17,
-                'requiem': 18,
-                'rich': 19,
-                'ruo': 20,
-                'vade': 21
-            }
-            num = users[member.lower()]
-            val = worksheet.cell(num, 2).value
+            val = self.get_amount(member)
             await self.bot.say(member + "'s current debt is " + str(val))
         except gspread.exceptions.APIError:
-            await self.bot.say("Error with Google API key. Please contact the developer <@{!s}>".format(os.environ['DEV_ID']))
+            self.set_credentials()
+            val = self.get_amount(member)
+            await self.bot.say(member + "'s current debt is " + str(val))
+            #await self.bot.say("Error with Google API key. Please contact the developer <@{!s}>".format(os.environ['DEV_ID']))
         except:
             await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
 
@@ -126,6 +110,31 @@ class NOHK:
         worksheet = sheet.get_worksheet(0)
         val = worksheet.cell(25, 1).value
         await self.bot.say("Current amount on hand is " + str(val) + " Php.")
+
+    def set_credentials(self):
+        self.scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+        self.service_account_info = json.loads(os.environ['Google_Key'])
+        self.credentials = ServiceAccountCredentials._from_parsed_json_keyfile(
+            self.service_account_info, self.scope)
+        self.file = gspread.authorize(self.credentials)
+
+    def get_amount(self, member):
+        sheet = self.file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
+                                      else os.environ['Sheet_ID_2018'])
+        worksheet = sheet.get_worksheet(0)
+        users = {
+            'alkaeid': 14,
+            'arvin': 15,
+            'marx': 16,
+            'otacom': 17,
+            'harold': 17,
+            'requiem': 18,
+            'rich': 19,
+            'ruo': 20,
+            'vade': 21
+        }
+        num = users[member.lower()]
+        return worksheet.cell(num, 2).value
 
 
 def setup(bot):
