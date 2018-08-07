@@ -58,7 +58,6 @@ class NOHK:
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
         cardList = VadeDeets.cardMap
-        #cardList.sort()
         commonCards = [card.title()
                        for card in cardList if "1" in card]
         uncommonCards = [card.title()
@@ -67,11 +66,11 @@ class NOHK:
                      for card in cardList if "3" in card]
         specialCards = [card.title()
                         for card in cardList if "4" in card]
-        commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
+        commonText = "__**Common Cards**__\n" + str(commonCards.sort()).strip("[]")
         uncommonText = "__**Uncommon Cards**__\n" + \
-            str(uncommonCards).strip("[]")
-        rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
-        specialText = "__**Special Cards**__\n" + str(specialCards).strip("[]")
+            str(uncommonCards.sort()).strip("[]")
+        rareText = "__**Rare Cards**__\n" + str(rareCards.sort()).strip("[]")
+        specialText = "__**Special Cards**__\n" + str(specialCards.sort()).strip("[]")
         message = (commonText + "\n\n" + uncommonText + "\n\n" +
                    rareText + "\n\n" + specialText).replace("'", "")
         await self.bot.say(message)
