@@ -66,11 +66,15 @@ class NOHK:
                      for card in cardList if "3" in card]
         specialCards = [card.title()
                         for card in cardList if "4" in card]
-        commonText = "__**Common Cards**__\n" + str(commonCards.sort()).strip("[]")
+        commonCards.sort()
+        uncommonCards.sort()
+        rareCards.sort()
+        specialCards.sort()
+        commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
         uncommonText = "__**Uncommon Cards**__\n" + \
-            str(uncommonCards.sort()).strip("[]")
-        rareText = "__**Rare Cards**__\n" + str(rareCards.sort()).strip("[]")
-        specialText = "__**Special Cards**__\n" + str(specialCards.sort()).strip("[]")
+            str(uncommonCards).strip("[]")
+        rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
+        specialText = "__**Special Cards**__\n" + str(specialCards).strip("[]")
         message = (commonText + "\n\n" + uncommonText + "\n\n" +
                    rareText + "\n\n" + specialText).replace("'", "")
         await self.bot.say(message)
