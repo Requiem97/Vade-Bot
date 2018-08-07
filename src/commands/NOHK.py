@@ -102,16 +102,17 @@ class NOHK:
             self.set_credentials()
             val = self.get_amount(member)
             await self.bot.say(member + "'s current debt is " + str(val))
-            #await self.bot.say("Error with Google API key. Please contact the developer <@{!s}>".format(os.environ['DEV_ID']))
         except:
             await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
 
     @fund.command()
     async def total(self):
         "views the current on hand ammount."
-        sheet = self.file.open_by_key(os.environ['Sheet_ID_2018'])
-        worksheet = sheet.get_worksheet(0)
-        val = worksheet.cell(25, 1).value
+        try:
+            val = self.get_fund_total()
+        except gspread.exceptions.APIError:
+            self.set_credentials()
+            val = self.get_fund_total()
         await self.bot.say("Current amount on hand is " + str(val) + " Php.")
 
     def set_credentials(self):
@@ -139,6 +140,11 @@ class NOHK:
         num = users[member.lower()]
         return worksheet.cell(num, 2).value
 
+    def get_fund_total(self):
+        sheet = self.file.open_by_key(os.environ['Sheet_ID_2018'])
+        worksheet = sheet.get_worksheet(0)
+        val = worksheet.cell(25, 1).value
+        return val
 
 def setup(bot):
     bot.add_cog(NOHK(bot))
