@@ -58,7 +58,7 @@ class NOHK:
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
         cardList = VadeDeets.cardMap
-        cardList.sort()
+        #cardList.sort()
         commonCards = [card.title()
                        for card in cardList if "1" in card]
         uncommonCards = [card.title()
