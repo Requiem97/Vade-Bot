@@ -64,24 +64,25 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    vade_bot.userID = message.author.id
+    global userID
+    userID = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
-    if vade_bot.userID != client.user.id:
+    if userID != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
                 await client.send_message(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
             else:
-                await client.send_message(message.channel, random.choice(vade_bot.ballReplies))
+                await client.send_message(message.channel, random.choice(ballReplies))
         elif message.content.lower() == "good vade":
             await client.send_file(message.channel, 'src/pics/vadesmile.jpg')
         elif message.content.lower() == "bad vade":
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
-        elif vade_bot.findBobo(words):
-            await client.send_message(message.channel, vade_bot.boboTag("BOBO MO"))
+        elif findBobo(words):
+            await client.send_message(message.channel, boboTag("BOBO MO"))
         elif random.randint(1, 100) <= 3:
-            msg = random.choice(vade_bot.messages)
-            await client.send_message(message.channel, vade_bot.boboTag(msg))
+            msg = random.choice(messages)
+            await client.send_message(message.channel, boboTag(msg))
 
 if __name__ == '__main__':
     for extension in extensions:
