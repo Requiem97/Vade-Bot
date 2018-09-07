@@ -46,7 +46,7 @@ class Mathematics:
         except ValueError:
             await self.bot.say("That ain't a number ffs")
         except ZeroDivisionError:
-            await self.bot.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(vade_bot.userID))
+            await self.bot.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(vade_bot.user_id))
 
 
 def setup(bot):

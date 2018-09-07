@@ -22,22 +22,22 @@ class NOHK:
         "Daily giveaway using the NOHK fund"
         date = datetime.datetime.now()
         amount = random.randint(20, 30)
-        if db.hasData(vade_bot.userID):
-            if db.canUse(vade_bot.userID):
-                db.uploadData(vade_bot.userID, amount, date)
+        if db.has_data(vade_bot.user_id):
+            if db.can_use(vade_bot.user_id):
+                db.upload_data(vade_bot.user_id, amount, date)
                 await self.bot.say("You got " + str(amount) + " Php from the fund.")
             else:
                 wait = vade_bot.wait.split(":")
                 await self.bot.say("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
         else:
-            db.createData(vade_bot.userID, amount, date)
+            db.create_data(vade_bot.user_id, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
 
     @commands.command()
     async def balance(self):
         "Get personal fund balance"
-        db.getFund(vade_bot.userID)
-        fund = db.getFund(vade_bot.userID)
+        db.get_fund(vade_bot.user_id)
+        fund = db.get_fund(vade_bot.user_id)
         await self.bot.say("You have " + str(fund) + " Php.")
 
     @commands.group(pass_context=True)
@@ -52,31 +52,31 @@ class NOHK:
         if card == None:
             pass
         else:
-            await self.bot.upload(vade_bot.cardList[vade_bot.cardMap.index(card.lower())])
+            await self.bot.upload(vade_bot.card_list[vade_bot.card_map.index(card.lower())])
 
     @card.command()
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
-        cardList = vade_bot.cardMap
-        commonCards = [card.title()
-                       for card in cardList if "1" in card]
-        uncommonCards = [card.title()
-                         for card in cardList if "2" in card]
-        rareCards = [card.title()
-                     for card in cardList if "3" in card]
-        specialCards = [card.title()
-                        for card in cardList if "4" in card]
-        commonCards.sort()
-        uncommonCards.sort()
-        rareCards.sort()
-        specialCards.sort()
-        commonText = "__**Common Cards**__\n" + str(commonCards).strip("[]")
-        uncommonText = "__**Uncommon Cards**__\n" + \
-            str(uncommonCards).strip("[]")
-        rareText = "__**Rare Cards**__\n" + str(rareCards).strip("[]")
-        specialText = "__**Special Cards**__\n" + str(specialCards).strip("[]")
-        message = (commonText + "\n\n" + uncommonText + "\n\n" +
-                   rareText + "\n\n" + specialText).replace("'", "")
+        card_list = vade_bot.card_map
+        common_cards = [card.title()
+                       for card in card_list if "1" in card]
+        uncommon_cards = [card.title()
+                         for card in card_list if "2" in card]
+        rare_cards = [card.title()
+                     for card in card_list if "3" in card]
+        special_cards = [card.title()
+                        for card in card_list if "4" in card]
+        common_cards.sort()
+        uncommon_cards.sort()
+        rare_cards.sort()
+        special_cards.sort()
+        common_text = "__**Common Cards**__\n" + str(common_cards).strip("[]")
+        uncommon_text = "__**Uncommon Cards**__\n" + \
+            str(uncommon_cards).strip("[]")
+        rare_text = "__**Rare Cards**__\n" + str(rare_cards).strip("[]")
+        special_text = "__**Special Cards**__\n" + str(special_cards).strip("[]")
+        message = (common_text + "\n\n" + uncommon_text + "\n\n" +
+                   rare_text + "\n\n" + special_text).replace("'", "")
         await self.bot.say(message)
 
     @commands.group(pass_context=True)

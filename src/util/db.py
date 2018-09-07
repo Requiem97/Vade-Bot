@@ -18,35 +18,35 @@ def connect():
         print("unable to connect to db")
 
 
-def uploadData(userID, amount, dt):
+def upload_data(user_id, amount, dt):
     global conn, cur
     cur.execute("SELECT fund from bot.daily WHERE user_id = %s;",
-                (str(userID),))
+                (str(user_id),))
     row = cur.fetchall()
     fund = int(row[0][0])
     fund += amount
     cur.execute("UPDATE bot.daily SET fund = %s, last_used = %s where user_id = %s;",
-                (fund, dt, str(userID),))
+                (fund, dt, str(user_id),))
     conn.commit()
 
 
-def hasData(userId):
+def has_data(user_id):
     global conn, cur
-    cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(userId),))
+    cur.execute("SELECT * from bot.daily WHERE user_id = %s;", (str(user_id),))
     return True if cur.fetchone() else False
 
 
-def createData(userID, amount, dt):
+def create_data(user_id, amount, dt):
     global conn, cur
     cur.execute("INSERT into bot.daily (user_id, fund, last_used) VALUES(%s, %s, %s)", (str(
-        userID), amount, dt,))
+        user_id), amount, dt,))
     conn.commit()
 
 
-def canUse(userID):
+def can_use(user_id):
     global conn, cur
     cur.execute(
-        "SELECT last_used from bot.daily WHERE user_id = %s;", (str(userID),))
+        "SELECT last_used from bot.daily WHERE user_id = %s;", (str(user_id),))
     row = cur.fetchall()
     last_used = row[0][0]
     current = datetime.datetime.now()
@@ -59,11 +59,11 @@ def canUse(userID):
         return False
 
 
-def getFund(userID):
+def get_fund(user_id):
     global conn, cur
-    if hasData(userID):
+    if has_data(user_id):
         cur.execute(
-            "SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
+            "SELECT fund from bot.daily WHERE user_id = %s;", (str(user_id),))
         row = cur.fetchall()
         fund = row[0][0]
         vade_bot.fund = str(fund)

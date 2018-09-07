@@ -20,7 +20,7 @@ class Vade:
     @commands.command()
     async def pics(self):
         "Vade\u2122 meme pics"
-        await self.bot.upload(random.choice(vade_bot.picList))
+        await self.bot.upload(random.choice(vade_bot.pic_list))
 
     @commands.command()
     async def introduce(self):

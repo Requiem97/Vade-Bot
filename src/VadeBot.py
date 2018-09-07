@@ -9,19 +9,19 @@ from src.util import db
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
 
-userID = '0'
+user_id = '0'
 file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
 wait = None
 fund = ""
 
-def boboTag(mess):
+def bobo_tag(mess):
     if mess == "BOBO MO":
-        mess = 'BOBO MO <@{!s}>'.format(userID)
+        mess = 'BOBO MO <@{!s}>'.format(user_id)
         return mess
     return mess
 
 
-def findBobo(words):
+def find_Bobo(words):
     for word in words:
         if word == "bobo":
             return True
@@ -35,21 +35,21 @@ for path in file_list:
         for line in lines:
             messages.append(line)
 
-picList = []
+pic_list = []
 for file in os.listdir("src/pics"):
     if file.endswith(".png") or file.endswith(".jpg"):
-        picList.append('src/pics/{}'.format(file))
+        pic_list.append('src/pics/{}'.format(file))
 
-cardList = []
+card_list = []
 for file in os.listdir("src/cards"):
     if file.endswith(".png") or file.endswith(".jpg"):
-        cardList.append('src/cards/{}'.format(file))
-cardMap = [x.replace("src/cards/", "").replace(".png",
-                                               "").replace(".jpg", "").lower() for x in cardList]
+        card_list.append('src/cards/{}'.format(file))
+card_map = [x.replace("src/cards/", "").replace(".png",
+                                               "").replace(".jpg", "").lower() for x in card_list]
 
-ballReplies = []
-with open("src/files/8ballReplies.txt") as file:
-    ballReplies = [line.strip() for line in file]
+ball_replies = []
+with open("src/files/8ball_replies.txt") as file:
+    ball_replies = [line.strip() for line in file]
 
 
 @client.event
@@ -64,25 +64,25 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    global userID
-    userID = message.author.id
+    global user_id
+    user_id = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
-    if userID != client.user.id:
+    if user_id != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
                 await client.send_message(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
             else:
-                await client.send_message(message.channel, random.choice(ballReplies))
+                await client.send_message(message.channel, random.choice(ball_replies))
         elif message.content.lower() == "good vade":
             await client.send_file(message.channel, 'src/pics/vadesmile.jpg')
         elif message.content.lower() == "bad vade":
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
-        elif findBobo(words):
-            await client.send_message(message.channel, boboTag("BOBO MO"))
+        elif find_Bobo(words):
+            await client.send_message(message.channel, bobo_tag("BOBO MO"))
         elif random.randint(1, 100) <= 3:
             msg = random.choice(messages)
-            await client.send_message(message.channel, boboTag(msg))
+            await client.send_message(message.channel, bobo_tag(msg))
 
 if __name__ == '__main__':
     for extension in extensions:
