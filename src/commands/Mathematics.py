@@ -37,8 +37,8 @@ class Mathematics:
         except ValueError:
             await self.bot.say("That ain't a number ffs")
 
-    @commands.command()
-    async def divide(self, x, y):
+    @commands.command(pass_context=True)
+    async def divide(self, ctx, x, y):
         "Divides some shit"
         try:
             z = float(x) / float(y)
@@ -46,7 +46,7 @@ class Mathematics:
         except ValueError:
             await self.bot.say("That ain't a number ffs")
         except ZeroDivisionError:
-            await self.bot.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(vade_bot.user_id))
+            await self.bot.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(ctx.message.author.id))
 
 
 def setup(bot):

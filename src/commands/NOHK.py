@@ -17,27 +17,27 @@ class NOHK:
         self.bot = bot
         self.set_credentials()
 
-    @commands.command()
-    async def daily(self):
+    @commands.command(pass_context=True)
+    async def daily(self, ctx):
         "Daily giveaway using the NOHK fund"
         date = datetime.datetime.now()
         amount = random.randint(20, 30)
-        if db.has_data(vade_bot.user_id):
-            if db.can_use(vade_bot.user_id):
-                db.upload_data(vade_bot.user_id, amount, date)
+        if db.has_data(ctx.message.author.id):
+            if db.can_use(ctx.message.author.id):
+                db.upload_data(ctx.message.author.id, amount, date)
                 await self.bot.say("You got " + str(amount) + " Php from the fund.")
             else:
                 wait = vade_bot.wait.split(":")
                 await self.bot.say("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
         else:
-            db.create_data(vade_bot.user_id, amount, date)
+            db.create_data(ctx.message.author.id, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
 
     @commands.command(pass_context=True)
     async def balance(self, ctx):
         "Get personal fund balance"
         print(ctx.message.author.id)
-        fund = db.get_fund(vade_bot.user_id)
+        fund = db.get_fund(ctx.message.author.id)
         await self.bot.say("You have " + str(fund) + " Php.")
 
     @commands.group(pass_context=True)
