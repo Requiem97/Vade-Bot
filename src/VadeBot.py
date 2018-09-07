@@ -15,6 +15,7 @@ wait = None
 fund = ""
 
 def bobo_tag(mess):
+    global user_id
     if mess == "BOBO MO":
         mess = 'BOBO MO <@{!s}>'.format(user_id)
         return mess
@@ -66,6 +67,7 @@ async def on_ready():
 async def on_message(message):
     global user_id
     user_id = message.author.id
+    print(user_id)
     await client.process_commands(message)
     words = message.content.lower().split()
     if user_id != client.user.id:

@@ -36,8 +36,6 @@ class NOHK:
     @commands.command()
     async def balance(self):
         "Get personal fund balance"
-        db.get_fund(vade_bot.user_id)
-        print("v!balance call " + vade_bot.user_id)
         fund = db.get_fund(vade_bot.user_id)
         await self.bot.say("You have " + str(fund) + " Php.")
 

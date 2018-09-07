@@ -60,7 +60,6 @@ def can_use(user_id):
 
 
 def get_fund(user_id):
-    print("get_fund", user_id)
     global conn, cur
     if has_data(user_id):
         cur.execute(
