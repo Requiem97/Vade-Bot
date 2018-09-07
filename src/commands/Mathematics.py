@@ -1,6 +1,7 @@
 import discord
+import src.VadeBot as vade_bot
 from discord.ext import commands
-from src.commands import VadeDeets
+
 
 
 class Mathematics:
@@ -45,7 +46,7 @@ class Mathematics:
         except ValueError:
             await self.bot.say("That ain't a number ffs")
         except ZeroDivisionError:
-            await self.bot.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(VadeDeets.userID))
+            await self.bot.say('BOBO MO <@{!s}> DI PWEDE YAN'.format(vade_bot.userID))
 
 
 def setup(bot):

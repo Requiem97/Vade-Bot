@@ -4,9 +4,9 @@ import gspread
 import os
 import json
 import random
+import src.VadeBot as vade_bot
 from discord.ext import commands
 from oauth2client.service_account import ServiceAccountCredentials
-from src.commands import VadeDeets
 from src.util import db
 
 
@@ -22,22 +22,22 @@ class NOHK:
         "Daily giveaway using the NOHK fund"
         date = datetime.datetime.now()
         amount = random.randint(20, 30)
-        if db.hasData(VadeDeets.userID):
-            if db.canUse(VadeDeets.userID):
-                db.uploadData(VadeDeets.userID, amount, date)
+        if db.hasData(vade_bot.userID):
+            if db.canUse(vade_bot.userID):
+                db.uploadData(vade_bot.userID, amount, date)
                 await self.bot.say("You got " + str(amount) + " Php from the fund.")
             else:
-                wait = VadeDeets.wait.split(":")
+                wait = vade_bot.wait.split(":")
                 await self.bot.say("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
         else:
-            db.createData(VadeDeets.userID, amount, date)
+            db.createData(vade_bot.userID, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
 
     @commands.command()
     async def balance(self):
         "Get personal fund balance"
-        db.getFund(VadeDeets.userID)
-        fund = db.getFund(VadeDeets.userID)
+        db.getFund(vade_bot.userID)
+        fund = db.getFund(vade_bot.userID)
         await self.bot.say("You have " + str(fund) + " Php.")
 
     @commands.group(pass_context=True)
@@ -52,12 +52,12 @@ class NOHK:
         if card == None:
             pass
         else:
-            await self.bot.upload(VadeDeets.cardList[VadeDeets.cardMap.index(card.lower())])
+            await self.bot.upload(vade_bot.cardList[vade_bot.cardMap.index(card.lower())])
 
     @card.command()
     async def list(self):
         "v!card list to view the list of availbale card for viewing"
-        cardList = VadeDeets.cardMap
+        cardList = vade_bot.cardMap
         commonCards = [card.title()
                        for card in cardList if "1" in card]
         uncommonCards = [card.title()

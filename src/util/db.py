@@ -1,7 +1,7 @@
 import os
 import psycopg2
 import datetime
-from src.commands import VadeDeets
+import src.VadeBot as vade_bot
 
 conn = None
 cur = None
@@ -51,7 +51,7 @@ def canUse(userID):
     last_used = row[0][0]
     current = datetime.datetime.now()
     delta = current - last_used
-    VadeDeets.wait = str(datetime.timedelta(seconds=75600 - delta.seconds))
+    vade_bot.wait = str(datetime.timedelta(seconds=75600 - delta.seconds))
     delta = current.timestamp() - last_used.timestamp()
     if delta >= 75600:
         return True
@@ -66,8 +66,8 @@ def getFund(userID):
             "SELECT fund from bot.daily WHERE user_id = %s;", (str(userID),))
         row = cur.fetchall()
         fund = row[0][0]
-        VadeDeets.fund = str(fund)
+        vade_bot.fund = str(fund)
         return fund
     else:
-        VadeDeets.fund = str(0)
+        vade_bot.fund = str(0)
         return 0

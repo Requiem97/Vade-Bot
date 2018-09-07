@@ -1,12 +1,55 @@
 import os
 import random
 import discord
+import glob
+import datetime
 from discord.ext.commands import Bot
-from src.commands import VadeDeets
 from src.util import db
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
+
+userID = '0'
+file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
+wait = None
+fund = ""
+
+def boboTag(mess):
+    if mess == "BOBO MO":
+        mess = 'BOBO MO <@{!s}>'.format(userID)
+        return mess
+    return mess
+
+
+def findBobo(words):
+    for word in words:
+        if word == "bobo":
+            return True
+    return False
+
+
+messages = []
+for path in file_list:
+    with open(path) as file:
+        lines = file.readlines()
+        for line in lines:
+            messages.append(line)
+
+picList = []
+for file in os.listdir("src/pics"):
+    if file.endswith(".png") or file.endswith(".jpg"):
+        picList.append('src/pics/{}'.format(file))
+
+cardList = []
+for file in os.listdir("src/cards"):
+    if file.endswith(".png") or file.endswith(".jpg"):
+        cardList.append('src/cards/{}'.format(file))
+cardMap = [x.replace("src/cards/", "").replace(".png",
+                                               "").replace(".jpg", "").lower() for x in cardList]
+
+ballReplies = []
+with open("src/files/8ballReplies.txt") as file:
+    ballReplies = [line.strip() for line in file]
 
 
 @client.event
@@ -21,24 +64,24 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    VadeDeets.userID = message.author.id
+    vade_bot.userID = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
-    if VadeDeets.userID != client.user.id:
+    if vade_bot.userID != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
                 await client.send_message(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
             else:
-                await client.send_message(message.channel, random.choice(VadeDeets.ballReplies))
+                await client.send_message(message.channel, random.choice(vade_bot.ballReplies))
         elif message.content.lower() == "good vade":
             await client.send_file(message.channel, 'src/pics/vadesmile.jpg')
         elif message.content.lower() == "bad vade":
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
-        elif VadeDeets.findBobo(words):
-            await client.send_message(message.channel, VadeDeets.boboTag("BOBO MO"))
+        elif vade_bot.findBobo(words):
+            await client.send_message(message.channel, vade_bot.boboTag("BOBO MO"))
         elif random.randint(1, 100) <= 3:
-            msg = random.choice(VadeDeets.messages)
-            await client.send_message(message.channel, VadeDeets.boboTag(msg))
+            msg = random.choice(vade_bot.messages)
+            await client.send_message(message.channel, vade_bot.boboTag(msg))
 
 if __name__ == '__main__':
     for extension in extensions:
