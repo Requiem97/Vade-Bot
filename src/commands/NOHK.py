@@ -33,9 +33,10 @@ class NOHK:
             db.create_data(vade_bot.user_id, amount, date)
             await self.bot.say("You got " + str(amount) + " Php from the fund.")
 
-    @commands.command()
-    async def balance(self):
+    @commands.command(pass_context=True)
+    async def balance(self, ctx):
         "Get personal fund balance"
+        print(ctx.message.author.id)
         fund = db.get_fund(vade_bot.user_id)
         await self.bot.say("You have " + str(fund) + " Php.")
 
