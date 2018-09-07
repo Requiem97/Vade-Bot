@@ -48,7 +48,7 @@ card_map = [x.replace("src/cards/", "").replace(".png",
                                                "").replace(".jpg", "").lower() for x in card_list]
 
 ball_replies = []
-with open("src/files/8ball_replies.txt") as file:
+with open("src/files/8ballReplies.txt") as file:
     ball_replies = [line.strip() for line in file]
 
 
