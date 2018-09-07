@@ -3,7 +3,6 @@ import src.VadeBot as vade_bot
 from discord.ext import commands
 
 
-
 class Mathematics:
     "Does some Math stuff"
 

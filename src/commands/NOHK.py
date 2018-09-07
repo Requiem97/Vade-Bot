@@ -59,13 +59,13 @@ class NOHK:
         "v!card list to view the list of availbale card for viewing"
         card_list = vade_bot.card_map
         common_cards = [card.title()
-                       for card in card_list if "1" in card]
+                        for card in card_list if "1" in card]
         uncommon_cards = [card.title()
-                         for card in card_list if "2" in card]
+                          for card in card_list if "2" in card]
         rare_cards = [card.title()
-                     for card in card_list if "3" in card]
+                      for card in card_list if "3" in card]
         special_cards = [card.title()
-                        for card in card_list if "4" in card]
+                         for card in card_list if "4" in card]
         common_cards.sort()
         uncommon_cards.sort()
         rare_cards.sort()
@@ -74,7 +74,8 @@ class NOHK:
         uncommon_text = "__**Uncommon Cards**__\n" + \
             str(uncommon_cards).strip("[]")
         rare_text = "__**Rare Cards**__\n" + str(rare_cards).strip("[]")
-        special_text = "__**Special Cards**__\n" + str(special_cards).strip("[]")
+        special_text = "__**Special Cards**__\n" + \
+            str(special_cards).strip("[]")
         message = (common_text + "\n\n" + uncommon_text + "\n\n" +
                    rare_text + "\n\n" + special_text).replace("'", "")
         await self.bot.say(message)
@@ -145,6 +146,7 @@ class NOHK:
         worksheet = sheet.get_worksheet(0)
         val = worksheet.cell(25, 1).value
         return val
+
 
 def setup(bot):
     bot.add_cog(NOHK(bot))
