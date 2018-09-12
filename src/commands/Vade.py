@@ -4,7 +4,6 @@ import src.VadeBot as vade_bot
 from discord.ext import commands
 
 
-
 class Vade:
     "Vade\u2122 memes"
 
@@ -13,14 +12,9 @@ class Vade:
 
     @commands.command()
     async def curse(self):
-        "Vade\u2122 curses"
-        msg = random.choice(vade_bot.messages)
-        await self.bot.say(msg)
-
-    @commands.command()
-    async def pics(self):
-        "Vade\u2122 meme pics"
+        "Vade\u2122 curses and Vade\u2122 meme pics"
         await self.bot.upload(random.choice(vade_bot.pic_list))
+        await self.bot.say(random.choice(vade_bot.messages))
 
     @commands.command()
     async def introduce(self):
