@@ -135,6 +135,7 @@ class NOHK:
     
     @contacts.command(pass_context=True)
     async def get(self, ctx, user: discord.User):
+        "Gets the contact number of a user"
         try:
             contact = db.get_number(user.id, ctx.message.server.id)
             if (contact == "no number"):
