@@ -132,6 +132,17 @@ class NOHK:
             await self.bot.say("Number updated")
         except:
             await self.bot.say("An error has occurred")
+    
+    @contacts.command(pass_context=True)
+    async def get(self, ctx, user: discord.User):
+        try:
+            contact = db.get_number(user.id, ctx.message.server.id)
+            if (contact == "no number"):
+                await self.bot.say("<@{!s}> has no saved number".format(user.id))
+            else:
+                await self.bot.say("<@{!s}> number is " + str(contact))
+        except:
+            await self.bot.say("An error has occurred")
 
     def set_credentials(self):
         self.scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']

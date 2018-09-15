@@ -85,7 +85,7 @@ def has_number(user_id, server_id):
 
 def get_number(user_id, server_id):
     global conn, cur
-    if has_data(user_id):
+    if has_number(user_id ,server_id):
         cur.execute(
             "SELECT contact from bot.contact_numbers WHERE user_id = %s, server_id;", (str(user_id), str(server_id)))
         row = cur.fetchall()
