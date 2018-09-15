@@ -116,6 +116,23 @@ class NOHK:
             val = self.get_fund_total()
         await self.bot.say("Current amount on hand is " + str(val) + " Php.")
 
+    @commands.group(pass_context=True)
+    async def contacts(self, ctx):
+        "NOHK contact number-related command group. v!help contacs to view more"
+        if ctx.invoked_subcommand == None:
+            await self.bot.say("__**NOHK Fund commands**__\n" +
+                               "`v!contacts update [number]` - updates contact number.\n" +
+                               "`v!contacts get [user]` - gets contact number of user.\n\n")
+
+    @contacts.command(pass_context=True)
+    async def update(self, ctx, number):
+        "Updates your contact number"
+        try:
+            db.update_number(ctx.message.author.id, ctx.message.server.id, number)
+            await self.bot.say("Number updated")
+        except:
+            await self.bot.say("An error has occurred")
+
     def set_credentials(self):
         self.scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
         self.service_account_info = json.loads(os.environ['Google_Key'])

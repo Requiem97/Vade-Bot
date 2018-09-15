@@ -71,3 +71,34 @@ def get_fund(user_id):
     else:
         vade_bot.fund = str(0)
         return 0
+
+def create_number(user_id, server_id, number):
+    global conn, cur
+    cur.execute("INSERT into bot.contact_numbers (user_id, server_id, contact) VALUES(%s, %s, %s)", (str(
+        user_id), str(server_id), str(number),))
+    conn.commit()
+
+def has_number(user_id, server_id):
+    global conn, cur
+    cur.execute("SELECT * from bot.contact_numbers WHERE user_id = %s and server_id = %s;", (str(user_id),  str(server_id),))
+    return True if cur.fetchone() else False
+
+def get_number(user_id, server_id):
+    global conn, cur
+    if has_data(user_id):
+        cur.execute(
+            "SELECT contact from bot.contact_numbers WHERE user_id = %s, server_id;", (str(user_id), str(server_id)))
+        row = cur.fetchall()
+        number = row[0][0]
+        return number
+    else:
+        return "no number"
+
+def update_number(user_id, server_id, number):
+    global conn, cur
+    if has_number(user_id, server_id):
+        cur.execute("UPDATE bot.contact_numbers SET contact = %s where user_id = %s and server_id = %s;",
+                (str(number), str(user_id), str(server_id),))
+        conn.commit()
+    else:
+        create_number(user_id, server_id, number)
