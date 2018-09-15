@@ -131,15 +131,18 @@ class NOHK:
             db.update_number(ctx.message.author.id, ctx.message.server.id, number)
             await self.bot.say("Number updated")
         except:
-            await self.bot.say("An error has occurred")
+            await self.bot.say("A fucking error has occurred")
     
     @contacts.command(pass_context=True)
     async def get(self, ctx, user: discord.User):
-        contact = db.get_number(user.id, ctx.message.server.id)
-        if (contact == "no number"):
-            await self.bot.say("<@{!s}> has no saved number".format(user.id))
-        else:
-             await self.bot.say("<@{!s}> number is " + str(contact))
+        try:
+            contact = db.get_number(user.id, ctx.message.server.id)
+            if (contact == "no number"):
+                await self.bot.say("<@{!s}> has no saved number".format(user.id))
+            else:
+                await self.bot.say(("<@{!s}> number is " + str(contact)).format(user.id))
+        except:
+            await self.bot.say("A fucking error has occurred")
 
 
     def set_credentials(self):
