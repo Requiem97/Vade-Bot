@@ -118,7 +118,7 @@ class NOHK:
 
     @commands.group(pass_context=True)
     async def contacts(self, ctx):
-        "NOHK contact number-related command group. v!help contatcs to view more"
+        "NOHK contact number-related command group. v!help contacts to view more"
         if ctx.invoked_subcommand == None:
             await self.bot.say("__**NOHK Contacts commands**__\n" +
                                "`v!contacts update [number]` - updates contact number.\n" +
