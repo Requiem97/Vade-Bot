@@ -118,9 +118,9 @@ class NOHK:
 
     @commands.group(pass_context=True)
     async def contacts(self, ctx):
-        "NOHK contact number-related command group. v!help contacs to view more"
+        "NOHK contact number-related command group. v!help contatcs to view more"
         if ctx.invoked_subcommand == None:
-            await self.bot.say("__**NOHK Fund commands**__\n" +
+            await self.bot.say("__**NOHK Contacts commands**__\n" +
                                "`v!contacts update [number]` - updates contact number.\n" +
                                "`v!contacts get [user]` - gets contact number of user.\n\n")
 
@@ -141,7 +141,7 @@ class NOHK:
             if (contact == "no number"):
                 await self.bot.say("<@{!s}> has no saved number".format(user.id))
             else:
-                await self.bot.say(("<@{!s}> number is " + str(contact)).format(user.id))
+                await self.bot.say(("<@{!s}>'s number is " + str(contact)).format(user.id))
         except:
             await self.bot.say("A fucking error has occurred")
 
