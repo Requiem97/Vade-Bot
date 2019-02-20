@@ -154,19 +154,23 @@ class NOHK:
         self.file = gspread.authorize(self.credentials)
 
     def get_amount(self, member):
-        sheet = self.file.open_by_key(os.environ['Sheet_ID_2017'] if member.lower() == 'harold'
-                                      else os.environ['Sheet_ID_2018'])
+        key = {
+            "harold":os.environ['Sheet_ID_2017'],
+            "requiem":os.environ['Sheet_ID_2018'],
+            "otacom":os.environ['Sheet_ID_2018']
+        }
+        sheet = self.file.open_by_key(key.get(member.lower(), os.environ['Sheet_ID_2019']))
         worksheet = sheet.get_worksheet(0)
         users = {
-            'alkaeid': 14,
-            'arvin': 15,
-            'marx': 16,
+            'alkaeid': 12,
+            'arvin': 13,
+            'marx': 14,
             'otacom': 17,
             'harold': 17,
             'requiem': 18,
-            'rich': 19,
-            'ruo': 20,
-            'vade': 21
+            'rich': 15,
+            'ruo': 16,
+            'vade': 17
         }
         num = users[member.lower()]
         return worksheet.cell(num, 2).value
