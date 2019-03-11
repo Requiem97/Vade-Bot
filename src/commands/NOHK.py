@@ -157,20 +157,21 @@ class NOHK:
         key = {
             "harold":os.environ['Sheet_ID_2017'],
             "requiem":os.environ['Sheet_ID_2018'],
-            "otacom":os.environ['Sheet_ID_2018']
+            "otacom":os.environ['Sheet_ID_2018'],
+            "alkaeid":os.environ['Sheet_ID_2018']
         }
         sheet = self.file.open_by_key(key.get(member.lower(), os.environ['Sheet_ID_2019']))
         worksheet = sheet.get_worksheet(0)
         users = {
-            'alkaeid': 12,
-            'arvin': 13,
-            'marx': 14,
+            'alkaeid': 14,
+            'arvin': 12,
+            'marx': 13,
             'otacom': 17,
             'harold': 17,
             'requiem': 18,
-            'rich': 15,
-            'ruo': 16,
-            'vade': 17
+            'rich': 14,
+            'ruo': 15,
+            'vade': 16
         }
         num = users[member.lower()]
         return worksheet.cell(num, 2).value
