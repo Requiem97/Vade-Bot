@@ -10,8 +10,8 @@ client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
 
 user_id = '0'
-#file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
-file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "endgame.txt"))
+file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
+#file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "endgame.txt"))
 wait = None
 fund = ""
 
