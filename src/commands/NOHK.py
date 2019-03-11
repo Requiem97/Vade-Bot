@@ -155,10 +155,11 @@ class NOHK:
 
     def get_amount(self, member):
         key = {
+            "alkaeid":os.environ['Sheet_ID_2018'],
             "harold":os.environ['Sheet_ID_2017'],
-            "requiem":os.environ['Sheet_ID_2018'],
             "otacom":os.environ['Sheet_ID_2018'],
-            "alkaeid":os.environ['Sheet_ID_2018']
+            "requiem":os.environ['Sheet_ID_2018'],
+            "tj":os.environ['Sheet_ID_2017']
         }
         sheet = self.file.open_by_key(key.get(member.lower(), os.environ['Sheet_ID_2019']))
         worksheet = sheet.get_worksheet(0)
@@ -171,6 +172,7 @@ class NOHK:
             'requiem': 18,
             'rich': 14,
             'ruo': 15,
+            'tj':23,
             'vade': 16
         }
         num = users[member.lower()]
