@@ -39,12 +39,12 @@ for path in file_list:
 
 pic_list = []
 for file in os.listdir("src/pics"):
-    if file.endswith(".png") or file.endswith(".jpg"):
+    if file.lower().endswith(".png") or file.lower().endswith(".jpg"):
         pic_list.append('src/pics/{}'.format(file))
 
 card_list = []
 for file in os.listdir("src/cards"):
-    if file.endswith(".png") or file.endswith(".jpg"):
+    if file.lower().endswith(".png") or file.lower().endswith(".jpg"):
         card_list.append('src/cards/{}'.format(file))
 card_map = [x.replace("src/cards/", "").replace(".png",
                                                "").replace(".jpg", "").lower() for x in card_list]
