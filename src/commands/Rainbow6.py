@@ -13,7 +13,7 @@ class Rainbow6:
         request = requests.get(url)
         scrape = BeautifulSoup(request.text, 'html.parser')
         if request.status_code == 200: 
-            rank = scrape.select("#profile > div.trn-scont.trn-scont--swap > div.trn-scont__content > div:nth-child(4) > div.r6-season-list > div > div.r6-season__info > div:nth-child(3) > div.trn-text--dimmed.trn-text--center")[0]
+            #rank = scrape.select("#profile > div.trn-scont.trn-scont--swap > div.trn-scont__content > div:nth-child(4) > div.r6-season-list > div > div.r6-season__info > div:nth-child(3) > div.trn-text--dimmed.trn-text--center")[0]
             profile_pic = scrape.select("#profile > div.trn-profile-header.trn-card > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img")[0]['src']
             wins = scrape.find("div", { "data-stat" : "PVPMatchesWon" }).text
             win_ratio = scrape.find("div", { "data-stat" : "PVPWLRatio" }).text
