@@ -7,7 +7,7 @@ from discord.ext.commands import Bot
 from src.util import db
 
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
-extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
+extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
 user_id = '0'
 file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
