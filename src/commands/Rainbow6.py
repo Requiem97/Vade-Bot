@@ -22,7 +22,7 @@ class Rainbow6:
             loses = scrape.find("div", { "data-stat" : "PVPMatchesLost" }).text
             embed = discord.Embed(title="{!s} Rainbow 6 Siege stats".format(user), colour=discord.Colour(0x4e07b3), url="https://discordapp.com", description="These are the general stats of {!s}  in Rainbow Six Siege".format(user))
             embed.set_thumbnail(url=profile_pic)
-            if not rank:
+            if rank:
                 embed.add_field(name="Rank", value=rank[0])
             embed.add_field(name="Wins", value=wins, inline=True)
             embed.add_field(name="Loses", value=loses, inline=True)
