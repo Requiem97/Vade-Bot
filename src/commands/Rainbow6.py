@@ -37,10 +37,11 @@ class Rainbow6:
             pvp_melee = scrape.find("div", {"data-stat": "PVPMeleeKills"})
             pvp_blind = scrape.find("div", {"data-stat": "PVPBlindKills"})
 
-            embed = discord.Embed(title="General Rainbow Six Siege Stats", colour=discord.Colour(0x903c31), url=url)
+            embed = discord.Embed(title="General Rainbow Six Siege Stats", colour=discord.Colour(0x903c31))
             embed.set_thumbnail(url=profile_pic[0]['src'])
             embed.set_author(name=user[0].text.strip(),
-                             icon_url=profile_pic[0]['src'])
+                            url=url,
+                            icon_url=profile_pic[0]['src'])
             embed.set_footer(text="Stats taken from r6.tracker.network")
 
             #About Field
