@@ -48,7 +48,7 @@ class Rainbow6:
                 embed.add_field(name="About", 
                                 value="**Level:** {}\n".format(level[0].text.strip()) \
                                     +"**Time Played:** {}\n".format(pvp_time_played.text.strip()) \
-                                    +"**Rank:** {}".format(rank[0].text.strip()))
+                                    +"**Rank:** {}\n".format(rank[0].text.strip()))
 
             else:
                 embed.add_field(name="About", 
@@ -59,7 +59,7 @@ class Rainbow6:
             embed.add_field(name="Win/Loss",
                             value="**Wins:** {}\n".format(pvp_wins.text.strip()) \
                                 + "**Loses:** {}\n".format(pvp_loses.text.strip()) \
-                                + "**W/R:** {}".format(pvp_wl_ratio.text.strip()), 
+                                + "**W/R:** {}\n".format(pvp_wl_ratio.text.strip()), 
                             inline=True)
             
             #Kill/Death field
@@ -69,7 +69,7 @@ class Rainbow6:
                                 + "**K/D:** {}\n".format(pvp_kd.text.strip()) \
                                 + "**Headshots:** {}\n".format(pvp_headshots.text.strip()) \
                                 + "**Melee Kills:** {}\n".format(pvp_melee.text.strip()) \
-                                + "**Blind Kills:** {}".format(pvp_blind.text.strip()), 
+                                + "**Blind Kills:** {}\n".format(pvp_blind.text.strip()), 
                             inline=True)
             await self.bot.say(embed=embed)
         elif request.status_code == 404:
