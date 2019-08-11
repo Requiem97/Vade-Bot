@@ -73,7 +73,7 @@ async def on_message(message):
     await client.process_commands(message)
     words = message.content.lower().split()
     if (user_id in mudae_ids and message.embeds):
-        await client.add_reaction(message, 	u"\U0001F496")
+        #await client.add_reaction(message, 	u"\U0001F496")
         await client.add_reaction(message, u"\u2B05")
         await client.add_reaction(message, u"\u27A1")
     elif user_id != client.user.id:
