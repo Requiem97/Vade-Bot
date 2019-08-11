@@ -73,9 +73,10 @@ async def on_message(message):
     await client.process_commands(message)
     words = message.content.lower().split()
     if (user_id in mudae_ids and message.embeds):
+        await client.add_reaction(message, 	u"\U0001F496")
         await client.add_reaction(message, u"\u2B05")
         await client.add_reaction(message, u"\u27A1")
-    if user_id != client.user.id:
+    elif user_id != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
                 await client.send_message(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
