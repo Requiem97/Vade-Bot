@@ -53,6 +53,8 @@ ball_replies = []
 with open("src/files/8ballReplies.txt") as file:
     ball_replies = [line.strip() for line in file]
 
+mudae_ids = ["432610292342587392", "588992629136424960"]
+
 
 @client.event
 async def on_ready():
@@ -70,6 +72,9 @@ async def on_message(message):
     user_id = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
+    if (user_id in mudae_ids and message.embeds):
+        await client.add_reaction(message, u"\u2B05")
+        await client.add_reaction(message, u"\u27A1")
     if user_id != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
