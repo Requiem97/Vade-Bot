@@ -74,10 +74,10 @@ async def on_message(message):
     await client.process_commands(message)
     words = message.content.lower().split()
     if (user_id in mudae_ids and message.embeds):
-        #asyncio.sleep(3)
-        await client.add_reaction(message, 	u"\U0001F496")
         await client.add_reaction(message, u"\u2B05")
         await client.add_reaction(message, u"\u27A1")
+        await asyncio.sleep(3)
+        await client.add_reaction(message, 	u"\U0001F496")
     elif user_id != client.user.id:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
