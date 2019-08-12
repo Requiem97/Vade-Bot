@@ -10,26 +10,9 @@ from src.util import db
 client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
-user_id = '0'
 file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
 #file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "endgame.txt"))
 wait = None
-fund = ""
-
-def bobo_tag(mess):
-    global user_id
-    if mess == "BOBO MO":
-        mess = 'BOBO MO <@{!s}>'.format(user_id)
-        return mess
-    return mess
-
-
-def find_Bobo(words):
-    for word in words:
-        if word == "bobo":
-            return True
-    return False
-
 
 messages = []
 for path in file_list:
@@ -56,6 +39,12 @@ with open("src/files/8ballReplies.txt") as file:
 
 #mudae_ids = ["432610292342587392", "588992629136424960", "531931447129538588"]
 
+def bobo_tag(user_id):
+    return 'BOBO MO <@{!s}>'.format(user_id)
+
+
+def find_Bobo(words):
+    return 'bobo' in words
 
 @client.event
 async def on_ready():
@@ -69,7 +58,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    global user_id
     user_id = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
@@ -89,10 +77,10 @@ async def on_message(message):
         elif message.content.lower() == "bad vade":
             await client.send_file(message.channel, 'src/pics/badvade.jpg')
         elif find_Bobo(words):
-            await client.send_message(message.channel, bobo_tag("BOBO MO"))
+            await client.send_message(message.channel, bobo_tag(user_id))
         elif random.randint(1, 100) <= 3:
             msg = random.choice(messages)
-            await client.send_message(message.channel, bobo_tag(msg))
+            await client.send_message(message.channel, msg)
 
 if __name__ == '__main__':
     for extension in extensions:

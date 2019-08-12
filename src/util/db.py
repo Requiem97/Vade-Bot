@@ -66,10 +66,8 @@ def get_fund(user_id):
             "SELECT fund from bot.daily WHERE user_id = %s;", (str(user_id),))
         row = cur.fetchall()
         fund = row[0][0]
-        vade_bot.fund = str(fund)
         return fund
     else:
-        vade_bot.fund = str(0)
         return 0
 
 def create_number(user_id, server_id, number):
