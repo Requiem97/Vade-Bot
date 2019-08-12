@@ -54,7 +54,7 @@ ball_replies = []
 with open("src/files/8ballReplies.txt") as file:
     ball_replies = [line.strip() for line in file]
 
-mudae_ids = ["432610292342587392", "588992629136424960", "531931447129538588"]
+#mudae_ids = ["432610292342587392", "588992629136424960", "531931447129538588"]
 
 
 @client.event
@@ -73,12 +73,12 @@ async def on_message(message):
     user_id = message.author.id
     await client.process_commands(message)
     words = message.content.lower().split()
-    if (user_id in mudae_ids and message.embeds):
-        await client.add_reaction(message, u"\u2B05")
-        await client.add_reaction(message, u"\u27A1")
-        await asyncio.sleep(3)
-        await client.add_reaction(message, 	u"\U0001F496")
-    elif user_id != client.user.id:
+    #if (user_id in mudae_ids and message.embeds):
+    #    await client.add_reaction(message, u"\u2B05")
+    #    await client.add_reaction(message, u"\u27A1")
+    #    await asyncio.sleep(3)
+    #    await client.add_reaction(message, 	u"\U0001F496")
+    if user_id != client.user.id and message.author.server.id != "607181202922799135":
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
                 await client.send_message(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
