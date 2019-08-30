@@ -179,7 +179,7 @@ class NOHK:
         return worksheet.cell(num, 2).value
 
     def get_fund_total(self):
-        sheet = self.file.open_by_key(os.environ['Sheet_ID_2018'])
+        sheet = self.file.open_by_key(os.environ['Sheet_ID_2019'])
         worksheet = sheet.get_worksheet(0)
         val = worksheet.cell(25, 1).value
         return val
