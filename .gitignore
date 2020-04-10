@@ -3,3 +3,4 @@ __pycache__/
 thumbs.db
 .vscode
 test.py
+env/
