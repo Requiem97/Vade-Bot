@@ -13,9 +13,9 @@ class Rainbow6:
         "Views General Rainbow 6 Siege stats of specified user"
         if ctx.invoked_subcommand is None and user is not None:
             url = 'https://r6.tracker.network/profile/pc/{}'.format(user.lower())
-            scrape, status_code = get_scrapper(url)
+            scrape, status_code = self.get_scrapper(url)
             if status_code == 200:
-                user, rank, profile_pic, level = get_profile_data(scrape)
+                user, rank, profile_pic, level = self.get_profile_data(scrape)
 
                 #Win/Loss data
                 pvp_time_played = scrape.find("div", { "data-stat" : "PVPTimePlayed" })
