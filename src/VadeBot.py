@@ -7,7 +7,7 @@ import asyncio
 from discord.ext.commands import Bot
 from src.util import db
 
-client = Bot(description="FUCK THIS SHIT", command_prefix="v!", pm_help=False)
+client = Bot(description="FUCK THIS SHIT", command_prefix=os.environ["Command_Prefix"], pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
 file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
