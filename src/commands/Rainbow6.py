@@ -85,23 +85,23 @@ class Rainbow6:
         else:
             pass
 
-def get_scrapper(self, url):
-    request = requests.get(url)
-    return BeautifulSoup(request.text, 'html.parser'), request.status_code
+    def get_scrapper(self, url):
+        request = requests.get(url)
+        return BeautifulSoup(request.text, 'html.parser'), request.status_code
 
-def get_profile_data(self, scrape):
-    #About Data
-    user = scrape.select("div.trn-profile-header.trn-card > div > h1 > span")[0].get_text()
-    rank = scrape.select(
-        "div.trn-scont.trn-scont--swap > div.trn-scont__content > div:nth-child(4) > div.r6-season-list > div > div.r6-season__info > div:nth-child(3) > div.trn-text--dimmed.trn-text--center"
-    )[0].get_text()
-    profile_pic = scrape.select(
-        "div.trn-profile-header.trn-card > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img"
-    )[0].get_text()
-    level = scrape.select(
-        "div.trn-card__content.trn-card--light.trn-defstats-grid > div:nth-child(1) > div > div.trn-defstat__value"
-    )[0].get_text()
-    return user, rank, profile_pic, level
+    def get_profile_data(self, scrape):
+        #About Data
+        user = scrape.select("div.trn-profile-header.trn-card > div > h1 > span")[0].get_text()
+        rank = scrape.select(
+            "div.trn-scont.trn-scont--swap > div.trn-scont__content > div:nth-child(4) > div.r6-season-list > div > div.r6-season__info > div:nth-child(3) > div.trn-text--dimmed.trn-text--center"
+        )[0].get_text()
+        profile_pic = scrape.select(
+            "div.trn-profile-header.trn-card > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img"
+        )[0].get_text()
+        level = scrape.select(
+            "div.trn-card__content.trn-card--light.trn-defstats-grid > div:nth-child(1) > div > div.trn-defstat__value"
+        )[0].get_text()
+        return user, rank, profile_pic, level
 
 def setup(bot):
     bot.add_cog(Rainbow6(bot))
