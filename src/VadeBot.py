@@ -51,7 +51,7 @@ def find_Bobo(words):
 async def on_ready():
     db.connect()
     print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
-        len(bot.servers)) + ' servers | Connected to ' + str(
+        len(bot.fetch_guilds())) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
     # type 1 = playing, 2 = listeningto, 3 = watching
     return await bot.change_presence(activity=discord.Game('ANAL CHILD PORN WHILE FUCKING CHILDREN'))
@@ -70,18 +70,18 @@ async def on_message(message):
     if user_id != bot.user.id and message.guild.id != 607181202922799135:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
-                await bot.send(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
+                await message.channel.send("THAT AIN'T A FUCKING QUESTION FFS")
             else:
-                await bot.send(message.channel, random.choice(ball_replies))
+                await message.channel.send(random.choice(ball_replies))
         elif message.content.lower() == "good vade":
-            await bot.send_file(message.channel, 'src/pics/vadesmile.jpg')
+            await message.channel.send_file(file='src/pics/vadesmile.jpg')
         elif message.content.lower() == "bad vade":
-            await bot.send_file(message.channel, 'src/pics/badvade.jpg')
+            await message.channel.send_file(file='src/pics/badvade.jpg')
         elif find_Bobo(words):
-            await bot.send(message.channel, bobo_tag(user_id))
+            await message.channel.send(bobo_tag(user_id))
         elif random.randint(1, 100) <= 3:
             msg = random.choice(messages)
-            await bot.send(message.channel, msg)
+            await message.channel.send(msg)
 
 if __name__ == '__main__':
     # for extension in extensions:
