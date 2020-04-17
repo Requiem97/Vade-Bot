@@ -88,13 +88,17 @@ async def on_message(message):
             await message.channel.send(msg)
 
 if __name__ == '__main__':
+    print('Checking for Command cogs')
     logging.info('Checking for Command cogs')
     for extension in extensions:
         try:
+            print('Loading %s cog', extension)
             logging.info('Loading %s cog', extension)
             bot.load_extension('commands.{}'.format(extension))
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(
                 'commands.{}'.format(extension), exc))
+    print('Running bot')
+    logging.info('Running Bot')
     bot.run(os.environ['VadeBot_Token'])
