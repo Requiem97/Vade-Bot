@@ -51,7 +51,8 @@ def find_Bobo(words):
 @bot.event
 async def on_ready():
     db.connect()
-    print(bot.fetch_guilds().flatten())
+    guild = await bot.fetch_guilds().flatten()
+    print(guild)
     print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
         len([1,2])) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
@@ -87,9 +88,10 @@ async def on_message(message):
             await message.channel.send(msg)
 
 if __name__ == '__main__':
+    logging.info('Checking for Command cogs')
     for extension in extensions:
         try:
-            logging.info('Loading %s module', extension)
+            logging.info('Loading %s cog', extension)
             bot.load_extension('commands.{}'.format(extension))
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
