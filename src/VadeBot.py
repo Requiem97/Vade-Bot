@@ -75,9 +75,9 @@ async def on_message(message):
             else:
                 await message.channel.send(random.choice(ball_replies))
         elif message.content.lower() == "good vade":
-            await message.channel.send_file(file='src/pics/vadesmile.jpg')
+            await message.channel.send(file='src/pics/vadesmile.jpg')
         elif message.content.lower() == "bad vade":
-            await message.channel.send_file(file='src/pics/badvade.jpg')
+            await message.channel.send(file='src/pics/badvade.jpg')
         elif find_Bobo(words):
             await message.channel.send(bobo_tag(user_id))
         elif random.randint(1, 100) <= 3:
