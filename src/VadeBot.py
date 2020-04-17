@@ -63,8 +63,6 @@ async def on_ready():
 async def on_message(message):
     user_id = message.author.id
     print(message)
-    await bot.process_commands(message)
-    print(message)
     words = message.content.lower().split()
     #if (user_id in mudae_ids and message.embeds):
     #    await bot.add_reaction(message, u"\u2B05")
@@ -86,6 +84,7 @@ async def on_message(message):
         elif random.randint(1, 100) <= 3:
             msg = random.choice(messages)
             await message.channel.send(msg)
+    await bot.process_commands(message)
 
 if __name__ == '__main__':
     print('Checking for Command cogs')
