@@ -50,8 +50,9 @@ def find_Bobo(words):
 @bot.event
 async def on_ready():
     db.connect()
+    print(bot.fetch_guilds())
     print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
-        len(bot.fetch_guilds().flatten())) + ' servers | Connected to ' + str(
+        len([1,2]) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
     # type 1 = playing, 2 = listeningto, 3 = watching
     return await bot.change_presence(activity=discord.Game('ANAL CHILD PORN WHILE FUCKING CHILDREN'))
