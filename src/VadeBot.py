@@ -50,7 +50,7 @@ def find_Bobo(words):
 @bot.event
 async def on_ready():
     db.connect()
-    print('Logged in as ' + bot.user.name + ' (ID:' + bot.user.id + ') | Connected to ' + str(
+    print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
         len(bot.servers)) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
     # type 1 = playing, 2 = listeningto, 3 = watching
@@ -67,7 +67,7 @@ async def on_message(message):
     #    await bot.add_reaction(message, u"\u27A1")
     #    await asyncio.sleep(3)
     #    await bot.add_reaction(message, 	u"\U0001F496")
-    if user_id != bot.user.id and message.author.server.id != 607181202922799135:
+    if user_id != bot.user.id and message.guild.id != 607181202922799135:
         if message.content.startswith('v!8ball'):
             if len(words) == 1:
                 await bot.send(message.channel, "THAT AIN'T A FUCKING QUESTION FFS")
