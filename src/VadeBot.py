@@ -4,6 +4,7 @@ import discord
 import glob
 import datetime
 import asyncio
+import logging
 from discord.ext.commands import Bot
 from src.util import db
 
@@ -60,7 +61,9 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     user_id = message.author.id
+    print(message)
     await bot.process_commands(message)
+    print(message)
     words = message.content.lower().split()
     #if (user_id in mudae_ids and message.embeds):
     #    await bot.add_reaction(message, u"\u2B05")
@@ -86,6 +89,7 @@ async def on_message(message):
 if __name__ == '__main__':
     for extension in extensions:
         try:
+            logging.info('Loading %s module', extension)
             bot.load_extension('commands.{}'.format(extension))
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
