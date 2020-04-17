@@ -8,7 +8,7 @@ from discord.ext.commands import Bot
 from src.util import db
 
 bot = Bot(description="FUCK THIS SHIT", command_prefix=os.environ["Command_Prefix"], pm_help=False)
-# extensions = ['Mathematics']
+extensions = ['Mathematics']
 # extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
 file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
@@ -50,7 +50,7 @@ def find_Bobo(words):
 @bot.event
 async def on_ready():
     db.connect()
-    print(bot.fetch_guilds())
+    print(bot.fetch_guilds().flatten())
     print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
         len([1,2])) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
@@ -84,11 +84,11 @@ async def on_message(message):
             await message.channel.send(msg)
 
 if __name__ == '__main__':
-    # for extension in extensions:
-    #     try:
-    #         bot.load_extension('commands.{}'.format(extension))
-    #     except Exception as e:
-    #         exc = '{}: {}'.format(type(e).__name__, e)
-    #         print('Failed to load extension {}\n{}'.format(
-    #             'commands.{}'.format(extension), exc))
+    for extension in extensions:
+        try:
+            bot.load_extension('commands.{}'.format(extension))
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format(
+                'commands.{}'.format(extension), exc))
     bot.run(os.environ['VadeBot_Token'])
