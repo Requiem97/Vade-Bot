@@ -10,7 +10,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from src.util import db
 
 
-class NOHK:
+class NOHK(commands.Cog):
     "Views some cards saved before the death of Bully Bot"
 
     def __init__(self, bot):

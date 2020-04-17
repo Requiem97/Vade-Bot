@@ -1,7 +1,7 @@
 asyncio
-beautifulsoup4==4.7.1
-discord.py==0.16.12
+beautifulsoup4
+discord.py
 gspread
 oauth2client==4.1.2
 psycopg2-binary
-requests==2.21.0
+requests

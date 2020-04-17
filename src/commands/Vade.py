@@ -4,7 +4,7 @@ import src.VadeBot as vade_bot
 from discord.ext import commands
 
 
-class Vade:
+class Vade(commands.Cog):
     "Vade\u2122 memes"
 
     def __init__(self, bot):

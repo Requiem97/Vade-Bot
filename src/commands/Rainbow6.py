@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class Rainbow6:
+class Rainbow6(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -32,22 +32,22 @@ class Rainbow6:
                 pvp_blind = scrape.find("div", {"data-stat": "PVPBlindKills"})
 
                 embed = discord.Embed(title="General Rainbow Six Siege Stats", colour=discord.Colour(0x903c31))
-                embed.set_thumbnail(url=profile_pic[0]['src'])
-                embed.set_author(name=user[0].text.strip(),
+                embed.set_thumbnail(url=profile_pic)
+                embed.set_author(name=user,
                                 url=url,
-                                icon_url=profile_pic[0]['src'])
+                                icon_url=profile_pic)
                 embed.set_footer(text="Stats taken from r6.tracker.network")
 
                 #About Field
                 if rank:
                     embed.add_field(name="About", 
-                                    value="**Level:** {}\n".format(level[0].text.strip()) \
+                                    value="**Level:** {}\n".format(level) \
                                         +"**Time Played:** {}\n".format(pvp_time_played.text.strip()) \
-                                        +"**Rank:** {}\n".format(rank[0].text.strip()))
+                                        +"**Rank:** {}\n".format(rank.text.strip()))
 
                 else:
                     embed.add_field(name="About", 
-                                    value="**Level:** {}\n".format(level[0].text.strip())  \
+                                    value="**Level:** {}\n".format(level)  \
                                         +"**Time Played:** {}\n".format(pvp_time_played.text.strip()))
 
                 #Win/Loss field

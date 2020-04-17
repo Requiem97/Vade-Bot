@@ -3,7 +3,7 @@ import src.VadeBot as vade_bot
 from discord.ext import commands
 
 
-class Mathematics:
+class Mathematics(commands.Cog):
     "Does some Math stuff"
 
     def __init__(self, bot):
