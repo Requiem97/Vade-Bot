@@ -28,10 +28,11 @@ class Utility(commands.Cog):
 
     @commands.command(name='8ball')
     async def _8ball(self, ctx, question = None):
+        "Ask Vade a question"
         if question is None:
             await ctx.send("THAT AIN'T A FUCKING QUESTION FFS")
         else:
-            await ctx.send(random.choice(ball_replies))
+            await ctx.send(random.choice(self.ball_replies))
 
 def setup(bot):
     bot.add_cog(Utility(bot))
