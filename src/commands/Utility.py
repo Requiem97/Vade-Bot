@@ -1,27 +1,37 @@
+import random
 import discord
 from discord.ext import commands
 
-
 class Utility(commands.Cog):
+    
     def __init__(self, bot):
         self.bot = bot
+        self.ball_replies = []
+        with open("src/files/8ballReplies.txt") as file:
+            self.ball_replies = [line.strip() for line in file]
 
     @commands.command()
-    async def bros(self, user: discord.User = None):
+    async def bros(self, ctx, user: discord.User = None):
         "What Vade should prioritise"
         try:
             if user:
-                await self.bot.say('Bros before hoes <@{!s}>'.format(user.id))
+                await ctx.send('Bros before hoes <@{!s}>'.format(user.id))
             else:
-                await self.bot.say('Bros before hoes')
+                await ctx.send('Bros before hoes')
         except:
-            await self.bot.say('Bros before hoes')
+            await ctx.send('Bros before hoes')
 
     @commands.command()
-    async def ping(self):
+    async def ping(self, ctx):
         "Pings to all game servers in existence"
-        await self.bot.say("I'M LAGGING FUCK MY LIFE")
+        await ctx.send("I'M LAGGING FUCK MY LIFE")
 
+    @commands.command(name='8ball')
+    async def _8ball(self, ctx, question = None):
+        if question is None:
+            await ctx.send("THAT AIN'T A FUCKING QUESTION FFS")
+        else:
+            await ctx.send(random.choice(ball_replies))
 
 def setup(bot):
     bot.add_cog(Utility(bot))

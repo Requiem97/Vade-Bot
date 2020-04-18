@@ -9,7 +9,7 @@ from discord.ext.commands import Bot
 from src.util import db
 
 bot = Bot(description="FUCK THIS SHIT", command_prefix=os.environ["Command_Prefix"], pm_help=False)
-extensions = ['Mathematics']
+extensions = ['Utility', 'Mathematics']
 # extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
 file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
@@ -70,12 +70,12 @@ async def on_message(message):
     #    await asyncio.sleep(3)
     #    await bot.add_reaction(message, 	u"\U0001F496")
     if user_id != bot.user.id and message.guild.id != 607181202922799135:
-        if message.content.startswith('v!8ball'):
-            if len(words) == 1:
-                await message.channel.send("THAT AIN'T A FUCKING QUESTION FFS")
-            else:
-                await message.channel.send(random.choice(ball_replies))
-        elif message.content.lower() == "good vade":
+        # if message.content.startswith('v!8ball'):
+        #     if len(words) == 1:
+        #         await message.channel.send("THAT AIN'T A FUCKING QUESTION FFS")
+        #     else:
+        #         await message.channel.send(random.choice(ball_replies))
+        if message.content.lower() == "good vade":
             await message.channel.send(file=discord.File('src/pics/vadesmile.jpg'))
         elif message.content.lower() == "bad vade":
             await message.channel.send(file=discord.File('src/pics/badvade.jpg'))
