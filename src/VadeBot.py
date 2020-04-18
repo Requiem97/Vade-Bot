@@ -53,6 +53,7 @@ async def on_ready():
     db.connect()
     guild = await bot.fetch_guilds().flatten()
     print(guild)
+    print(len(guild))
     print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
         len([1,2])) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
@@ -62,9 +63,10 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     await bot.process_commands(message)
-    user_id = message.author.id
-    print(message)
-    words = message.content.lower().split()
+    # user_id = message.author.id
+    # print(message)
+    # words = message.content.lower().split()
+    
     #if (user_id in mudae_ids and message.embeds):
     #    await bot.add_reaction(message, u"\u2B05")
     #    await bot.add_reaction(message, u"\u27A1")
