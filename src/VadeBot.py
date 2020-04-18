@@ -60,9 +60,9 @@ async def on_ready():
     # type 1 = playing, 2 = listeningto, 3 = watching
     await bot.change_presence(activity=discord.Game('ANAL CHILD PORN WHILE FUCKING CHILDREN'))
 
-@bot.event
-async def on_message(message):
-    await bot.process_commands(message)
+# @bot.event
+# async def on_message(message):
+#     await bot.process_commands(message)
     # user_id = message.author.id
     # print(message)
     # words = message.content.lower().split()
