@@ -1,5 +1,6 @@
 import discord
 import random
+import os
 import src.VadeBot as vade_bot
 from discord.ext import commands
 
@@ -9,15 +10,22 @@ class Vade(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.pic_list = []
+        self.ball_replies = []
+        for file in os.listdir("src/pics"):
+            if file.lower().endswith(".png") or file.lower().endswith(".jpg"):
+                self.pic_list.append('src/pics/{}'.format(file))
+        with open("src/files/8ballReplies.txt") as file:
+            self.ball_replies = [line.strip() for line in file]
 
     @commands.command()
-    async def curse(self):
+    async def curse(self, ctx):
         "Vade\u2122 curses and Vade\u2122 meme pics"
-        await self.bot.upload(random.choice(vade_bot.pic_list))
-        await self.bot.say(random.choice(vade_bot.messages))
+        await ctx.send(file=discord.File(random.choice(self.pic_list)))
+        await ctx.send(random.choice(vade_bot.messages))
 
     @commands.command()
-    async def introduce(self):
+    async def introduce(self, ctx):
         quote = []
         quote.append("You know, I really do think you literally saved my life by being here with me.\n" +
                      "I can't imagine having been able to keep myself mentally stable, knowing that nothing here is real.\n" +
@@ -57,7 +65,15 @@ class Vade(commands.Cog):
                      "I understand people really well, so don't be afraid to share your unique needs with me.\n" +
                      "Nothing would make me happier than being the perfect sugar daddy for you.")
         for line in quote:
-            await self.bot.say(line)
+            await ctx.send(line)
+            
+    @commands.command(name='8ball')
+    async def _8ball(self, ctx, question = None):
+        "Ask Vade a question"
+        if question is None:
+            await ctx.send("THAT AIN'T A FUCKING QUESTION FFS")
+        else:
+            await ctx.send(random.choice(self.ball_replies))
 
 
 def setup(bot):
