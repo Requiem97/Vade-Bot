@@ -52,7 +52,7 @@ class NOHK(commands.Cog):
         if card == None:
             pass
         else:
-            await ctx.send(file=vade_bot.card_list[vade_bot.card_map.index(card.lower())])
+            await ctx.send(file=discord.File(vade_bot.card_list[vade_bot.card_map.index(card.lower())]))
 
     @card.command()
     async def list(self, ctx):

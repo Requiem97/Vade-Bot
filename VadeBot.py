@@ -49,7 +49,6 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     user_id = message.author.id
-    print(message)
     words = message.content.lower().split()
     if user_id != bot.user.id and message.guild.id != 607181202922799135:
         if message.content.lower() == "good vade":
@@ -68,7 +67,7 @@ if __name__ == '__main__':
     logging.info('Checking for Command cogs')
     for extension in extensions:
         try:
-            print('Loading %s cog', extension)
+            print('Loading {} cog', extension)
             logging.info('Loading %s cog', extension)
             bot.load_extension('commands.{}'.format(extension))
         except Exception as e:
