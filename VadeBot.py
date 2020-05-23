@@ -40,7 +40,7 @@ def find_Bobo(words):
 async def on_ready():
     db.connect()
     guild = await bot.fetch_guilds().flatten()
-    print('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
+    logging.info('Logged in as ' + bot.user.name + ' (ID:' + str(bot.user.id) + ') | Connected to ' + str(
         len(guild)) + ' servers | Connected to ' + str(
         len(set(bot.get_all_members()))) + ' users')
     # type 1 = playing, 2 = listeningto, 3 = watching
@@ -67,13 +67,11 @@ if __name__ == '__main__':
     logging.info('Checking for Command cogs')
     for extension in extensions:
         try:
-            print('Loading {} cog', extension)
             logging.info('Loading %s cog', extension)
             bot.load_extension('commands.{}'.format(extension))
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
-            print('Failed to load extension {}\n{}'.format(
+            logging.error('Failed to load extension {}\n{}'.format(
                 'commands.{}'.format(extension), exc))
-    print('Running bot')
     logging.info('Running Bot')
     bot.run(os.environ['VadeBot_Token'])

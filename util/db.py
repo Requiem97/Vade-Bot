@@ -1,6 +1,7 @@
 import os
 import psycopg2
 import datetime
+import logging
 import VadeBot as vade_bot
 
 conn = None
@@ -13,9 +14,10 @@ def connect():
     try:
         conn = psycopg2.connect(db_url, sslmode='require')
         cur = conn.cursor()
-        print("success")
-    except:
-        print("unable to connect to db")
+        logging.info("success")
+    except Exception as e:
+        logging.error('{}: {}'.format(type(e).__name__, e))
+        logging.error("unable to connect to db")
 
 
 def upload_data(user_id, amount, dt):
