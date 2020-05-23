@@ -17,7 +17,7 @@ class NOHK(commands.Cog):
         self.bot = bot
         self.set_credentials()
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def daily(self, ctx):
         "Daily giveaway using the NOHK fund"
         date = datetime.datetime.now()
@@ -25,37 +25,37 @@ class NOHK(commands.Cog):
         if db.has_data(ctx.message.author.id):
             if db.can_use(ctx.message.author.id):
                 db.upload_data(ctx.message.author.id, amount, date)
-                await self.bot.say("You got " + str(amount) + " Php from the fund.")
+                await ctx.send("You got " + str(amount) + " Php from the fund.")
             else:
                 wait = vade_bot.wait.split(":")
-                await self.bot.say("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
+                await ctx.send("Please try again in " + wait[0] + " hours " + wait[1] + " minutes and " + wait[2] + " seconds.")
         else:
             db.create_data(ctx.message.author.id, amount, date)
-            await self.bot.say("You got " + str(amount) + " Php from the fund.")
+            await ctx.send("You got " + str(amount) + " Php from the fund.")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def balance(self, ctx):
         "Get personal fund balance"
         print(ctx.message.author.id)
         fund = db.get_fund(ctx.message.author.id)
-        await self.bot.say("You have " + str(fund) + " Php.")
+        await ctx.send("You have " + str(fund) + " Php.")
 
-    @commands.group(pass_context=True)
+    @commands.group()
     async def card(self, ctx):
         "use v!help card to view more"
         if ctx.invoked_subcommand is None:
-            await self.bot.say("BAWAL YAN BOBO!")
+            await ctx.send("BAWAL YAN BOBO!")
 
     @card.command()
-    async def view(self, card):
+    async def view(self, ctx, card):
         "v!card view [card] to view the specified card, provided it's in the list"
         if card == None:
             pass
         else:
-            await self.bot.upload(vade_bot.card_list[vade_bot.card_map.index(card.lower())])
+            await ctx.send(file=vade_bot.card_list[vade_bot.card_map.index(card.lower())])
 
     @card.command()
-    async def list(self):
+    async def list(self, ctx):
         "v!card list to view the list of availbale card for viewing"
         card_list = vade_bot.card_map
         common_cards = [card.title()
@@ -78,72 +78,72 @@ class NOHK(commands.Cog):
             str(special_cards).strip("[]")
         message = (common_text + "\n\n" + uncommon_text + "\n\n" +
                    rare_text + "\n\n" + special_text).replace("'", "")
-        await self.bot.say(message)
+        await ctx.send(message)
 
-    @commands.group(pass_context=True)
+    @commands.group()
     async def fund(self, ctx):
         "NOHK fund-related command group. v!help fund to view more"
         if ctx.invoked_subcommand == None:
-            await self.bot.say("__**NOHK Fund commands**__\n" +
+            await ctx.send("__**NOHK Fund commands**__\n" +
                                "`v!fund utang [member]` - views debt of specified member.\n" +
                                "`v!fund total` - views the current on hand amount.\n\n" +
                                "use `v!balance`  to view your v!daily total")
 
     @fund.command()
-    async def utang(self, member=None):
+    async def utang(self, ctx,  member=None):
         "views debt of a sepcified member"
 
         if member == None:
-            await self.bot.say("Specify a fund subscriber dumbass")
+            await ctx.send("Specify a fund subscriber dumbass")
             return
         try:
             val = self.get_amount(member)
-            await self.bot.say(member + "'s current debt is " + str(val))
+            await ctx.send(member + "'s current debt is " + str(val))
         except gspread.exceptions.APIError:
             self.set_credentials()
             val = self.get_amount(member)
-            await self.bot.say(member + "'s current debt is " + str(val))
+            await ctx.send(member + "'s current debt is " + str(val))
         except:
-            await self.bot.say("SUMALI KA MUNA SA COLLECTION GAGO!")
+            await ctx.send("SUMALI KA MUNA SA COLLECTION GAGO!")
 
     @fund.command()
-    async def total(self):
+    async def total(self, ctx):
         "views the current on hand ammount."
         try:
             val = self.get_fund_total()
         except gspread.exceptions.APIError:
             self.set_credentials()
             val = self.get_fund_total()
-        await self.bot.say("Current amount on hand is " + str(val) + " Php.")
+        await ctx.send("Current amount on hand is " + str(val) + " Php.")
 
-    @commands.group(pass_context=True)
+    @commands.group()
     async def contacts(self, ctx):
         "NOHK contact number-related command group. v!help contacts to view more"
         if ctx.invoked_subcommand == None:
-            await self.bot.say("__**NOHK Contacts commands**__\n" +
+            await ctx.send("__**NOHK Contacts commands**__\n" +
                                "`v!contacts update [number]` - updates contact number.\n" +
                                "`v!contacts get [user]` - gets contact number of user.\n\n")
 
-    @contacts.command(pass_context=True)
+    @contacts.command()
     async def update(self, ctx, number):
         "Updates your contact number"
         try:
             db.update_number(ctx.message.author.id, ctx.message.server.id, number)
-            await self.bot.say("Number updated")
+            await ctx.send("Number updated")
         except:
-            await self.bot.say("A fucking error has occurred")
+            await ctx.send("A fucking error has occurred")
     
-    @contacts.command(pass_context=True)
+    @contacts.command()
     async def get(self, ctx, user: discord.User):
         "Gets the contact number of a user"
         try:
             contact = db.get_number(user.id, ctx.message.server.id)
             if (contact == "no number"):
-                await self.bot.say("<@{!s}> has no saved number".format(user.id))
+                await ctx.send("<@{!s}> has no saved number".format(user.id))
             else:
-                await self.bot.say(("<@{!s}>'s number is " + str(contact)).format(user.id))
+                await ctx.send(("<@{!s}>'s number is " + str(contact)).format(user.id))
         except:
-            await self.bot.say("A fucking error has occurred")
+            await ctx.send("A fucking error has occurred")
 
 
     def set_credentials(self):
