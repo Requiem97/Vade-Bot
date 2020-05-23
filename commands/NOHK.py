@@ -1,6 +1,7 @@
 import datetime
 import discord
 import gspread
+import logging
 import os
 import json
 import random
@@ -131,7 +132,8 @@ class NOHK(commands.Cog):
             print(ctx.message.author.id)
             db.update_number(ctx.message.author.id, ctx.message.guild, number)
             await ctx.send("Number updated")
-        except:
+        except Exception as e:
+            logging.error('{}: {}'.format(type(e).__name__, e))
             await ctx.send("A fucking error has occurred")
     
     @contacts.command()
@@ -143,7 +145,8 @@ class NOHK(commands.Cog):
                 await ctx.send("<@{!s}> has no saved number".format(user.id))
             else:
                 await ctx.send(("<@{!s}>'s number is " + str(contact)).format(user.id))
-        except:
+        except Exception as e:
+            logging.error('{}: {}'.format(type(e).__name__, e))
             await ctx.send("A fucking error has occurred")
 
 
