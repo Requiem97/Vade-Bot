@@ -130,7 +130,8 @@ class NOHK(commands.Cog):
         "Updates your contact number"
         try:
             print(ctx.message.author.id)
-            db.update_number(ctx.message.author.id, ctx.message.guild, number)
+            print(ctx.message.guild.id)
+            db.update_number(ctx.message.author.id, ctx.message.guild.id, number)
             await ctx.send("Number updated")
         except Exception as e:
             logging.error('{}: {}'.format(type(e).__name__, e))
