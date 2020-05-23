@@ -128,7 +128,7 @@ class NOHK(commands.Cog):
     async def update(self, ctx, number):
         "Updates your contact number"
         try:
-            print(ctx)
+            print(ctx.message)
             db.update_number(ctx.message.author.id, ctx.message.guild, number)
             await ctx.send("Number updated")
         except:
