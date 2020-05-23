@@ -128,7 +128,7 @@ class NOHK(commands.Cog):
     async def update(self, ctx, number):
         "Updates your contact number"
         try:
-            db.update_number(ctx.message.author.id, ctx.message.server.id, number)
+            db.update_number(ctx.message.author.id, ctx.message.guild, number)
             await ctx.send("Number updated")
         except:
             await ctx.send("A fucking error has occurred")
@@ -137,7 +137,7 @@ class NOHK(commands.Cog):
     async def get(self, ctx, user: discord.User):
         "Gets the contact number of a user"
         try:
-            contact = db.get_number(user.id, ctx.message.server.id)
+            contact = db.get_number(user.id, ctx.message.guild)
             if (contact == "no number"):
                 await ctx.send("<@{!s}> has no saved number".format(user.id))
             else:
