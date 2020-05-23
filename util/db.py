@@ -1,7 +1,7 @@
 import os
 import psycopg2
 import datetime
-import src.VadeBot as vade_bot
+import VadeBot as vade_bot
 
 conn = None
 cur = None

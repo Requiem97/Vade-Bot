@@ -4,10 +4,10 @@ import gspread
 import os
 import json
 import random
-import src.VadeBot as vade_bot
+import VadeBot as vade_bot
 from discord.ext import commands
 from oauth2client.service_account import ServiceAccountCredentials
-from src.util import db
+from util import db
 
 
 class NOHK(commands.Cog):

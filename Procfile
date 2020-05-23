@@ -1,1 +1,1 @@
-worker: python src/VadeBot.py
+worker: python VadeBot.py

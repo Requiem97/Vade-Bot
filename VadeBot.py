@@ -6,14 +6,14 @@ import datetime
 import asyncio
 import logging
 from discord.ext.commands import Bot
-from src.util import db
+from util import db
 
 bot = Bot(description="FUCK THIS SHIT", command_prefix=os.environ["Command_Prefix"], pm_help=False)
 extensions = ['Utility', 'Mathematics', 'Vade']
 # extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
-file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "*.txt"))
-#file_list = glob.glob(os.path.join(os.getcwd(), "src/files/prompts", "endgame.txt"))
+file_list = glob.glob(os.path.join(os.getcwd(), "files/prompts", "*.txt"))
+#file_list = glob.glob(os.path.join(os.getcwd(), "files/prompts", "endgame.txt"))
 wait = None
 
 messages = []
@@ -24,10 +24,10 @@ for path in file_list:
             messages.append(line)
 
 card_list = []
-for file in os.listdir("src/cards"):
+for file in os.listdir("cards"):
     if file.lower().endswith(".png") or file.lower().endswith(".jpg"):
-        card_list.append('src/cards/{}'.format(file))
-card_map = [x.replace("src/cards/", "").replace(".png",
+        card_list.append('cards/{}'.format(file))
+card_map = [x.replace("cards/", "").replace(".png",
                                                "").replace(".jpg", "").lower() for x in card_list]
 
 def bobo_tag(user_id):
@@ -53,9 +53,9 @@ async def on_message(message):
     words = message.content.lower().split()
     if user_id != bot.user.id and message.guild.id != 607181202922799135:
         if message.content.lower() == "good vade":
-            await message.channel.send(file=discord.File('src/pics/vadesmile.jpg'))
+            await message.channel.send(file=discord.File('pics/vadesmile.jpg'))
         elif message.content.lower() == "bad vade":
-            await message.channel.send(file=discord.File('src/pics/badvade.jpg'))
+            await message.channel.send(file=discord.File('pics/badvade.jpg'))
         elif find_Bobo(words):
             await message.channel.send(bobo_tag(user_id))
         elif random.randint(1, 100) <= 3:

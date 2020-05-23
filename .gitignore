@@ -4,3 +4,4 @@ thumbs.db
 .vscode
 test.py
 env/
+.env

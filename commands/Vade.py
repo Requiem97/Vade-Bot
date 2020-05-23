@@ -1,7 +1,7 @@
 import discord
 import random
 import os
-import src.VadeBot as vade_bot
+import VadeBot as vade_bot
 from discord.ext import commands
 
 
@@ -12,10 +12,10 @@ class Vade(commands.Cog):
         self.bot = bot
         self.pic_list = []
         self.ball_replies = []
-        for file in os.listdir("src/pics"):
+        for file in os.listdir("pics"):
             if file.lower().endswith(".png") or file.lower().endswith(".jpg"):
-                self.pic_list.append('src/pics/{}'.format(file))
-        with open("src/files/8ballReplies.txt") as file:
+                self.pic_list.append('pics/{}'.format(file))
+        with open("files/8ballReplies.txt") as file:
             self.ball_replies = [line.strip() for line in file]
 
     @commands.command()
