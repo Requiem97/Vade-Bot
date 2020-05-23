@@ -63,7 +63,7 @@ async def on_message(message):
     await bot.process_commands(message)
 
 if __name__ == '__main__':
-    print('Checking for Command cogs')
+    logging.basicConfig(level=logging.INFO)
     logging.info('Checking for Command cogs')
     for extension in extensions:
         try:
