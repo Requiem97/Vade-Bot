@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import requests
+import logging
 from bs4 import BeautifulSoup
 
 
@@ -8,7 +9,7 @@ class Rainbow6(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group(pass_context=True)
+    @commands.group()
     async def r6(self, ctx, user=None):
         "Views General Rainbow 6 Siege stats of specified user"
         if ctx.invoked_subcommand is None and user is not None:
@@ -16,7 +17,6 @@ class Rainbow6(commands.Cog):
             scrape, status_code = self.get_scrapper(url)
             if status_code == 200:
                 user, rank, profile_pic, level = self.get_profile_data(scrape)
-
                 #Win/Loss data
                 pvp_time_played = scrape.find("div", { "data-stat" : "PVPTimePlayed" })
                 pvp_wins = scrape.find("div", {"data-stat": "PVPMatchesWon"})
@@ -43,7 +43,7 @@ class Rainbow6(commands.Cog):
                     embed.add_field(name="About", 
                                     value="**Level:** {}\n".format(level) \
                                         +"**Time Played:** {}\n".format(pvp_time_played.text.strip()) \
-                                        +"**Rank:** {}\n".format(rank.text.strip()))
+                                        +"**Rank:** {}\n".format(rank))
 
                 else:
                     embed.add_field(name="About", 
@@ -66,24 +66,27 @@ class Rainbow6(commands.Cog):
                                     + "**Melee Kills:** {}\n".format(pvp_melee.text.strip()) \
                                     + "**Blind Kills:** {}\n".format(pvp_blind.text.strip()), 
                                 inline=True)
-                await self.bot.say(embed=embed)
+                logging.info(embed.to_dict())
+                await ctx.send(embed=embed)
             elif status_code == 404:
-                await self.bot.say("User does not exist")
+                logging.error(status_code)
+                await ctx.send("User does not exist")
             else:
-                await self.bot.say("Some error has occured")
+                logging.error(status_code)
+                await ctx.send("Some error has occured")
         else:
-            await self.bot.say("__**R6 commands**__\n" +
+            await ctx.send("__**R6 commands**__\n" +
                     "`v!r6 [user]` - views General R6 stats of the user.\n" +
                     "`v!r6 ranked [user]` - views ranked R6 stats of the user.\n\n"
                 )
     
-    @r6.command()
-    async def ranked(self, user=None):
-        "Views Ranked Rainbow 6 Siege stats of specified user"
-        if user is None:
-            await self.bot.say("Please specify a user")
-        else:
-            pass
+    # @r6.command() #TO BE IMPLEMENTED
+    # async def ranked(self, ctx, user=None):
+    #     "Views Ranked Rainbow 6 Siege stats of specified user"
+    #     if user is None:
+    #         await ctx.send("Please specify a user")
+    #     else:
+    #         pass
 
     def get_scrapper(self, url):
         request = requests.get(url)
@@ -91,16 +94,16 @@ class Rainbow6(commands.Cog):
 
     def get_profile_data(self, scrape):
         #About Data
-        user = scrape.select("div.trn-profile-header.trn-card > div > h1 > span")[0].get_text()
+        user = scrape.select("div.trn-profile-header.trn-card > div > h1 > span")[0].get_text().strip()
         rank = scrape.select(
             "div.trn-scont.trn-scont--swap > div.trn-scont__content > div:nth-child(4) > div.r6-season-list > div > div.r6-season__info > div:nth-child(3) > div.trn-text--dimmed.trn-text--center"
-        )[0].get_text()
+        )[0].get_text().strip()
         profile_pic = scrape.select(
             "div.trn-profile-header.trn-card > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img"
-        )[0].get_text()
+        )[0]['src']
         level = scrape.select(
             "div.trn-card__content.trn-card--light.trn-defstats-grid > div:nth-child(1) > div > div.trn-defstat__value"
-        )[0].get_text()
+        )[0].get_text().strip()
         return user, rank, profile_pic, level
 
 def setup(bot):

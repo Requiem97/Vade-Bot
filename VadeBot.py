@@ -9,8 +9,7 @@ from discord.ext.commands import Bot
 from util import db
 
 bot = Bot(description="FUCK THIS SHIT", command_prefix=os.environ["Command_Prefix"], pm_help=False)
-extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
-# extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
+extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
 
 file_list = glob.glob(os.path.join(os.getcwd(), "files/prompts", "*.txt"))
 #file_list = glob.glob(os.path.join(os.getcwd(), "files/prompts", "endgame.txt"))
@@ -71,7 +70,7 @@ if __name__ == '__main__':
             bot.load_extension('commands.{}'.format(extension))
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
-            logging.error('Failed to load extension {}\n{}'.format(
+            logging.exception('Failed to load extension {}\n{}'.format(
                 'commands.{}'.format(extension), exc))
     logging.info('Running Bot')
     bot.run(os.environ['VadeBot_Token'])

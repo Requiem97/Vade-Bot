@@ -14,10 +14,10 @@ def connect():
     try:
         conn = psycopg2.connect(db_url, sslmode='require')
         cur = conn.cursor()
-        logging.info("success")
+        logging.info("Successfully connected to database")
     except Exception as e:
         logging.error('{}: {}'.format(type(e).__name__, e))
-        logging.error("unable to connect to db")
+        logging.error("Unable to connect to database")
 
 
 def upload_data(user_id, amount, dt):
