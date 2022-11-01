@@ -9,7 +9,7 @@ from discord.ext.commands import Bot
 from util import db
 
 bot = Bot(description="FUCK THIS SHIT", command_prefix=os.environ["Command_Prefix"], pm_help=False)
-extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK', 'Rainbow6']
+extensions = ['Utility', 'Mathematics', 'Vade', 'NOHK']
 
 file_list = glob.glob(os.path.join(os.getcwd(), "files", "curse.txt"))
 #file_list = glob.glob(os.path.join(os.getcwd(), "files/prompts", "endgame.txt"))
